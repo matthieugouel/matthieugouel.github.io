@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DevOps on Random Logs</title>
+    <link>https://matthieugouel.github.io/categories/devops/</link>
+    <description>Recent content in DevOps on Random Logs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr</language>
+    <lastBuildDate>Wed, 27 Jun 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://matthieugouel.github.io/categories/devops/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Développement continu à la maison (partie 4)</title>
+      <link>https://matthieugouel.github.io/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://matthieugouel.github.io/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/</guid>
+      <description>Après avoir installé notre cluster Kubernetes nous avons configuré un reverse proxy et tout le nécessaire pour déployer convenablement des applications. Aujourd’hui nous allons installer ce qu’il faut pour enfin faire du déploiement continu. On va enfin pouvoir justifier le titre de la série !
+Notre stratégie d’intégration continue se doit d’être assez simple, du moins pour commencer. Exit Jenkins &amp;amp; Cie qui demandent beaucoup de ressources et une configuration non-négligeable.</description>
+    </item>
+    
+    <item>
+      <title>Développement continu à la maison (partie 3)</title>
+      <link>https://matthieugouel.github.io/blog/2018-06-05-developpement-continu-a-la-maison-partie-3/</link>
+      <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://matthieugouel.github.io/blog/2018-06-05-developpement-continu-a-la-maison-partie-3/</guid>
+      <description>Si vous avez suivi la partie précédente vous avez désormais un cluster Kubernetes tout neuf prêt à accueillir toutes nos applications. C’est génial mais il manque quelque chose.
+On l’a vu quand on a testé le cluster, l’application est accessible depuis le navigateur via l’adresse IP du master et un port aléatoire. Il faut avouer que ce n’est pas très pratique, nous on aimerait bien avoir un nom DNS associé à ce service pour pouvoir y accéder en HTTPS par exemple.</description>
+    </item>
+    
+    <item>
+      <title>Développement continu à la maison (partie 2)</title>
+      <link>https://matthieugouel.github.io/blog/2018-05-21-developpement-continu-a-la-maison-partie-2/</link>
+      <pubDate>Mon, 21 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://matthieugouel.github.io/blog/2018-05-21-developpement-continu-a-la-maison-partie-2/</guid>
+      <description>Et voilà nous y sommes. Après une longue introduction la fois précédente, aujourd’hui, on s’attaque enfin à la pratique ! Cet article a pour but d’installer notre cluster Kubernetes. C’est la première pierre à notre édifice (et non des moindres !) qui nous permettra ensuite d’installer tous nos services. Il s’agit donc de ne pas se rater !
+Ça tombe bien parce que Kubernetes possède une documentation très complète. Je n’ai pas vraiment envie de copier-coller la documentation officielle dans cet article c’est pourquoi je vais abuser de liens vers celle-ci.</description>
+    </item>
+    
+    <item>
+      <title>Développement continu à la maison (partie 1)</title>
+      <link>https://matthieugouel.github.io/blog/2018-05-14-developpement-continu-a-la-maison-partie-1/</link>
+      <pubDate>Mon, 14 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://matthieugouel.github.io/blog/2018-05-14-developpement-continu-a-la-maison-partie-1/</guid>
+      <description>Premier article du thème DevOps. Ce thème regroupera les articles parlant des sujets d’automatisation et de déploiement d’applications dans un environment de production. C’est vaste !
+Je vous propose dans cette série d’articles de construire pas à pas notre écosystème moderne de développement continu. Nous commencerons par installer un orchestrateur qui nous servira de fondations pour notre système. Sur ces fondations nous déploierons les services nécessaires pour faire de l’intégration continue comme un logiciel de gestion de version, un système de développement continu, des dépôts etc … Enfin, une fois tout ça fait il ne nous restera plus qu’à mettre en place notre workflow afin de déployer nos propres applications au sein même de notre orchestrateur.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bjørn on Random Logs</title>
+    <link>https://matthieugouel.github.io/tags/bj%C3%B8rn/</link>
+    <description>Recent content in Bjørn on Random Logs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr</language>
+    <lastBuildDate>Thu, 22 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://matthieugouel.github.io/tags/bj%C3%B8rn/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Oops!... I Did It Again</title>
+      <link>https://matthieugouel.github.io/blog/2018-11-22-oops-i-did-it-again/</link>
+      <pubDate>Thu, 22 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://matthieugouel.github.io/blog/2018-11-22-oops-i-did-it-again/</guid>
+      <description>Oops!&amp;hellip; I Did It Again Il y a quelques mois je vous ai parlé de Gibica, mon tout premier interpréteur en Python. Eh bien en fait j’en ai fait un autre, cette fois ci en Rust, et il s’appelle Bjørn. Voilà.
+Mais enfin pourquoi s’infliger une telle peine ?! Sachant que ce second interpréteur m’a pris encore plus de temps à coder que le premier ?! C’est ce qu’on va voir aujourd’hui.</description>
+    </item>
+    
+  </channel>
+</rss>

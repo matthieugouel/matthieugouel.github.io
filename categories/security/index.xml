@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Security on Random Logs</title>
+    <link>https://matthieugouel.github.io/categories/security/</link>
+    <description>Recent content in Security on Random Logs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr</language>
+    <lastBuildDate>Mon, 28 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://matthieugouel.github.io/categories/security/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Gérer nos certificats SSL</title>
+      <link>https://matthieugouel.github.io/blog/2018-05-28-gerer-nos-certificats-ssl/</link>
+      <pubDate>Mon, 28 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://matthieugouel.github.io/blog/2018-05-28-gerer-nos-certificats-ssl/</guid>
+      <description>Dans la série Développement continu à la maison (partie 1) nous allons mettre en place des services avec des endpoints en HTTPS sur Kubernetes. Pour ce faire nous avons bien évidemment besoin d’un certificat valide, celui-ci issu d’une autorité de certification valide.
+Il y a plusieurs moyens de se procurer de tels certificats.
+Acheter un certificat Alors oui on peut acheter un certificat à une autorité de certification ou bien à des revendeurs.</description>
+    </item>
+    
+  </channel>
+</rss>

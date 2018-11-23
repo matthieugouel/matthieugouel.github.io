@@ -1,0 +1,1890 @@
+<!DOCTYPE HTML>
+
+<html>
+    <head>
+        
+            
+                <title>Développement continu à la maison (partie 4)</title>
+            
+        
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="generator" content="Hugo 0.39" />
+        
+  
+    
+    
+  
+
+  
+
+  <link rel="apple-touch-icon-precomposed" href='/favicon/apple-touch-icon-precomposed-1.0.png'>
+  <link rel="icon" href='/favicon/favicon-1.0.png'>
+  
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content='/favicon/mstile-1.0.png'>
+  <meta name="application-name" content="Random Logs">
+  <meta name="msapplication-tooltip" content="A collection of random thoughts (fr).">
+  <meta name="msapplication-config" content='/favicon/ieconfig.xml'>
+
+
+
+        
+        
+            <meta name="description" content="Docker registry, SCM et CI/CD">
+        
+
+        <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Développement continu à la maison (partie 4)"/>
+<meta name="twitter:description" content="Docker registry, SCM et CI/CD"/>
+<meta name="twitter:site" content="@matthieugouel"/>
+
+        <meta name="twitter:site" content="@matthieugouel">
+        <meta name="twitter:creator" content="@matthieugouel">
+        
+        <meta name="twitter:title" content="Développement continu à la maison (partie 4)" />
+        <meta name="twitter:description" content="Docker registry, SCM et CI/CD" />
+        
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="https://matthieugouel.github.io/img/main/logo.png" />
+        <meta property="og:title" content="Développement continu à la maison (partie 4)" />
+<meta property="og:description" content="Docker registry, SCM et CI/CD" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://matthieugouel.github.io/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/" />
+
+
+
+<meta property="article:published_time" content="2018-06-27T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2018-06-27T00:00:00&#43;00:00"/>
+
+<meta property="og:site_name" content="Random Logs" />
+
+
+
+
+
+
+
+
+
+
+        <meta property="og:image" content="https://matthieugouel.github.io/img/main/logo.png">
+        <meta property="og:image:type" content="image/png">
+        <meta property="og:image:width" content="512">
+        <meta property="og:image:height" content="256">
+        
+<meta itemprop="name" content="Développement continu à la maison (partie 4)">
+<meta itemprop="description" content="Docker registry, SCM et CI/CD">
+
+
+<meta itemprop="datePublished" content="2018-06-27T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-06-27T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="2362">
+
+
+
+<meta itemprop="keywords" content="Kubernetes," />
+
+        
+
+        
+            
+        
+
+        
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+            <link rel="stylesheet" href="/css/main.css">
+            <link rel="stylesheet" href="/css/add-on.css">
+            <link rel="stylesheet" href="/css/academicons.min.css">
+        
+
+        
+            
+                
+            
+        
+
+
+  
+    
+    <link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+  
+
+
+      
+    </head>
+    <body>
+
+      
+      <div id="wrapper">
+
+    
+    
+<header id="header">
+    
+      
+        <h1><a href="/">Blog</a></h1>
+      
+    
+
+    <nav class="links">
+        <ul>
+            
+                <li>
+                    <a href="/">
+                            <i class="fa fa-home">&nbsp;</i>Accueil
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/blog/">
+                            <i class="fa fa-newspaper-o">&nbsp;</i>Blog
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/projects/">
+                            <i class="fa fa-tasks">&nbsp;</i>Projets
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/categories/">
+                            <i class="fa fa-sitemap">&nbsp;</i>Catégories
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/contact/">
+                            <i class="fa fa-envelope-o">&nbsp;</i>Contact
+                    </a>
+                </li>
+            
+        </ul>
+    </nav>
+    <nav class="main">
+        <ul>
+            
+            <li id="share-nav" class="share-menu" style="display:none;">
+                <a class="fa-share-alt" href="#share-menu">Share</a>
+            </li>
+            
+            
+            <li class="search">
+                <a class="fa-search" href="#search">Search</a>
+                <form id="search" method="get" action="//google.com/search">
+                    <input type="text" name="q" placeholder="Search" />
+                    <input type="hidden" name="as_sitesearch" value="https://matthieugouel.github.io">
+                </form>
+            </li>
+            <li class="menu">
+                <a class="fa-bars" href="#menu">Menu</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+<section id="menu">
+
+    
+        <section>
+            <form class="search" method="get" action="//google.com/search">
+                <input type="text" name="q" placeholder="Search" />
+                <input type="hidden" name="as_sitesearch" value="https://matthieugouel.github.io">
+            </form>
+        </section>
+
+    
+        <section>
+            <ul class="links">
+                
+                    <li>
+                        <a href="/">
+                            <h3>
+                                <i class="fa fa-home">&nbsp;</i>Accueil
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/blog/">
+                            <h3>
+                                <i class="fa fa-newspaper-o">&nbsp;</i>Blog
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/projects/">
+                            <h3>
+                                <i class="fa fa-tasks">&nbsp;</i>Projets
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/">
+                            <h3>
+                                <i class="fa fa-sitemap">&nbsp;</i>Catégories
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/contact/">
+                            <h3>
+                                <i class="fa fa-envelope-o">&nbsp;</i>Contact
+                            </h3>
+                        </a>
+                    </li>
+                
+            </ul>
+        </section>
+
+    
+        <section id="recent-posts">
+            <div class="mini-posts">
+                <header>
+                    <h3>Posts récents</h3>
+                </header>
+                
+
+                
+                    
+                
+
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/2018-11-22-oops-i-did-it-again/">Oops!... I Did It Again</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2018-11-22'>
+                                    22-11-2018</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-11-22-oops-i-did-it-again/" class="image featured">
+            <img src="/img/blog/dev.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/2018-07-24-presentation-de-gibica/">Présentation de Gibica</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2018-07-24'>
+                                    24-07-2018</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-07-24-presentation-de-gibica/" class="image featured">
+            <img src="/img/blog/dev.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/">Développement continu à la maison (partie 4)</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2018-06-27'>
+                                    27-06-2018</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/" class="image featured">
+            <img src="/img/blog/devops.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/2018-06-05-developpement-continu-a-la-maison-partie-3/">Développement continu à la maison (partie 3)</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2018-06-05'>
+                                    05-06-2018</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-06-05-developpement-continu-a-la-maison-partie-3/" class="image featured">
+            <img src="/img/blog/devops.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/2018-05-28-gerer-nos-certificats-ssl/">Gérer nos certificats SSL</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2018-05-28'>
+                                    28-05-2018</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-05-28-gerer-nos-certificats-ssl/" class="image featured">
+            <img src="/img/blog/devops.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+
+                
+                    <a href=
+                        
+                            /blog/
+                        
+                        class="button">Voir plus</a>
+                
+            </div>
+        </section>
+
+    
+        
+</section>
+
+    <section id="share-menu">
+    <section id="social-share-nav">
+        <ul class="links">
+            <header>
+                <h3>Partager ce post <i class="fa fa-smile-o"></i></h3>
+            </header>
+            
+
+
+<li>
+  <a href="//twitter.com/share?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-27-developpement-continu-a-la-maison-partie-4%2f&amp;text=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%204%29&amp;via=matthieugouel" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+<li>
+  <a href="//plus.google.com/share?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-27-developpement-continu-a-la-maison-partie-4%2f" target="_blank" class="share-btn google-plus">
+    <i class="fa fa-google-plus"></i>
+    <p>Google+</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-27-developpement-continu-a-la-maison-partie-4%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+<li>
+  <a href="//reddit.com/submit?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-27-developpement-continu-a-la-maison-partie-4%2f&amp;title=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%204%29" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-27-developpement-continu-a-la-maison-partie-4%2f&amp;title=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%204%29" target="_blank" class="share-btn linkedin">
+      <i class="fa fa-linkedin"></i>
+      <p>LinkedIn</p>
+    </a>
+</li>
+
+
+<li>
+  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-27-developpement-continu-a-la-maison-partie-4%2f&amp;title=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%204%29" target="_blank" class="share-btn stumbleupon">
+    <i class="fa fa-stumbleupon"></i>
+    <p>StumbleUpon</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-27-developpement-continu-a-la-maison-partie-4%2f&amp;description=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%204%29" target="_blank" class="share-btn pinterest">
+    <i class="fa fa-pinterest-p"></i>
+    <p>Pinterest</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by &amp;body=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-27-developpement-continu-a-la-maison-partie-4%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+        </ul>
+    </section>
+</section>
+
+    
+    <div id="main">
+        
+        
+        <article class="post">
+  <header>
+    <div class="title">
+        
+            <h1><a href="/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/">Développement continu à la maison (partie 4)</a></h1>
+            
+        
+        
+            <p>Docker registry, SCM et CI/CD</p>
+        
+    </div>
+    <div class="meta">
+        <time class="published"
+            datetime='2018-06-27 00:00:00 &#43;0000 UTC'>
+            27-06-2018</time>
+        <span class="author"></span>
+        
+            <p>12 minutes</p>
+        
+    </div>
+</header>
+
+
+  
+    <section id="social-share">
+      <ul class="icons">
+        
+
+
+<li>
+  <a href="//twitter.com/share?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-27-developpement-continu-a-la-maison-partie-4%2f&amp;text=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%204%29&amp;via=matthieugouel" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+<li>
+  <a href="//plus.google.com/share?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-27-developpement-continu-a-la-maison-partie-4%2f" target="_blank" class="share-btn google-plus">
+    <i class="fa fa-google-plus"></i>
+    <p>Google+</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-27-developpement-continu-a-la-maison-partie-4%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+<li>
+  <a href="//reddit.com/submit?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-27-developpement-continu-a-la-maison-partie-4%2f&amp;title=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%204%29" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-27-developpement-continu-a-la-maison-partie-4%2f&amp;title=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%204%29" target="_blank" class="share-btn linkedin">
+      <i class="fa fa-linkedin"></i>
+      <p>LinkedIn</p>
+    </a>
+</li>
+
+
+<li>
+  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-27-developpement-continu-a-la-maison-partie-4%2f&amp;title=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%204%29" target="_blank" class="share-btn stumbleupon">
+    <i class="fa fa-stumbleupon"></i>
+    <p>StumbleUpon</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-27-developpement-continu-a-la-maison-partie-4%2f&amp;description=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%204%29" target="_blank" class="share-btn pinterest">
+    <i class="fa fa-pinterest-p"></i>
+    <p>Pinterest</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by &amp;body=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-27-developpement-continu-a-la-maison-partie-4%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+      </ul>
+    </section>
+  
+
+  
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/" class="image featured">
+            <img src="/img/blog/devops.jpg" alt="">
+        </a>
+    
+
+
+  <div id="content">
+    
+
+<p>Après avoir installé notre cluster Kubernetes nous avons configuré un reverse proxy et tout le nécessaire pour déployer convenablement des applications. Aujourd’hui nous allons installer ce qu’il faut pour enfin faire du déploiement continu. On va enfin pouvoir justifier le titre de la série !</p>
+
+<!-- more -->
+
+<p>Notre stratégie d’intégration continue se doit d’être assez simple, du moins pour commencer. Exit Jenkins &amp; Cie qui demandent beaucoup de ressources et une configuration non-négligeable. Nous on a juste besoin d’un logiciel de gestion de version (ou SCM pour Source Code Management) et d’un logiciel de déploiement continu qui s’enclenchera à chaque fois que l’on poussera du code sur notre SCM. Nous allons aussi avoir besoin d’un <em>registry</em> Docker pour stocker les images crée par la chaîne CI/CD et déployé dans notre cluster.</p>
+
+<p>Nous en avons déjà parlé, j’ai choisi <em>Gogs</em> comme SCM car il est simple et léger. Pour l’intégration continue j’ai choisi <em>Drone</em> qui est également très simple à mettre en place et ne demande pas beaucoup de ressources (rappelez-vous mon cluster est loin d’être une flèche). La mission d’aujourd’hui : installer et faire fonctionner ces deux outils ensemble !</p>
+
+<h3 id="installation-du-docker-registry">Installation du docker registry</h3>
+
+<p>Cette partie est vraiment très simple. Docker fourni une image Docker registry déjà toute prête à utiliser.</p>
+
+<p>Le stockage ici est fait via un <em>persistant volume</em> qui pointe sur un dossier local du node. Ce n’est PAS l’idéal du tout : si le node tombe bye-bye les images. Mais bon dans un premier temps c’est plus simple que monter un serveur NFS. Vous verrez que c’est aussi cette méthode qui est utilisée pour Gogs (ce qui est encore plus dangereux !)</p>
+
+<p>Voici le <a href="https://github.com/matthieugouel/kubernetes-manifests/blob/master/registry/registry.yml">manifest</a> qui me sert à déployer le Docker registry sur ma configuration. Comme d’habitude à adapter selon vos besoins.</p>
+
+<pre><code class="language-yaml">---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: registry
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: registry-volume
+  namespace: registry
+  labels:
+    type: local
+    app: registry
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: /tmp/data/registry-volume
+  persistentVolumeReclaimPolicy: Delete
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: registry-claim
+  namespace: registry
+  labels:
+    app: registry
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: registry
+  namespace: registry
+  labels:
+    app: registry
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: registry
+    spec:
+      containers:
+      - image: registry:2
+        name: registry
+        env:
+        - name: REGISTRY_HTTP_ADDR
+          value: :5000
+        - name: REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY
+          value: /var/lib/registry
+        ports:
+        - containerPort: 5000
+          name: registry
+          protocol: TCP
+        volumeMounts:
+        - name: registry
+          mountPath: /var/lib/registry
+      volumes:
+      - name: registry
+        persistentVolumeClaim:
+          claimName: registry-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: registry
+  name: registry
+  namespace: registry
+spec:
+  ports:
+  - name: registry
+    port: 5000
+    targetPort: 5000
+    protocol: TCP
+  selector:
+    app: registry
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: registry
+  namespace: registry
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  tls:
+  - secretName: home
+  rules:
+  - host: registry.home.local
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: registry
+          servicePort: 5000
+</code></pre>
+
+<p>Pour l’installation, toujours pareil :</p>
+
+<pre><code class="language-bash">kubectl apply -f https://raw.githubusercontent.com/MatthieuGouel/k8s-manifests/master/registry/registry.yml
+</code></pre>
+
+<p>Une fois que le pod est en état <em>running</em>  (en faisant un <code>kubectl get pods -n registry</code> pour vérifier) on peut faire un petit test d’upload d’une image manuellement sur le Docker registry.</p>
+
+<pre><code class="language-bash">docker pull hello-world
+docker tag hello-world registry.home.local/hello-world
+docker push registry.home.local/hello-world
+</code></pre>
+
+<pre><code class="language-bash">The push refers to repository [registry.home.local/hello-world]
+2b8cbd0846c5: Pushed
+latest: digest: sha256:d5c74e6f8efc7bdf42a5e22bd764400692cf82360d86b8c587a7584b03f51520 size: 524
+</code></pre>
+
+<p>Parfait on a maintenant un endroit pour stocker les images qui résulteront de notre chaîne CI/CD. On passe au SCM maintenant ?!</p>
+
+<h3 id="installation-de-gogs">Installation de Gogs</h3>
+
+<p>Pour la suite je vais utiliser une façon alternative et plus pratique pour installer des programmes dans notre cluster. Les manifests c’est sympa mais la communauté s’est vite rendu compte que c’était un peu lourd. Finalement  d’un utilisateur à l’autre la structure d’un manifest est toujours la même, seul les variables changent. C’est ainsi que <strong>Helm</strong> est né. Ce soft prend en entrée des templates d’installation (charts) pour chaque programme à installer et prend également un yaml de variables correspondant à ce template (pour ceux qui connaissent Jinja2 c’est exactement le même principe).</p>
+
+<p>Ce qui est bien c’est qu’il existe déjà moulte <a href="https://github.com/kubernetes/charts">charts</a> qui attentent juste d’être utilisé avec vos propres variables … cool non ? :-)</p>
+
+<p>Pour l’installation de Gogs et Drone, donc, je vais vous donner l’exemple du yaml de variables que j’ai utilisé ainsi que la commande qui utilise le chart associé à ces variables.  Ce qui est bien en plus c’est que l&rsquo;on a pas besoin non plus d&rsquo;inventer la structure yaml car la communauté qui fait le chart fourni étalement un exemple de yaml avec des valeurs par défaut ! Pratique du coup si ça se trouve vous n’aurez même pas à le changer (n’y croyez pas trop quand même) !</p>
+
+<p>Pour installer Helm, allez donc faire un tour sur le <a href="https://docs.helm.sh/using_helm/#quickstart-guide">site officiel</a> ou sur leur <a href="https://github.com/kubernetes/helm">repository Github</a>. Voilà. Ah oui n&rsquo;oubliez pas d&rsquo;ajouter le repertoire &ldquo;incubator&rdquo; de helm une fois l&rsquo;installation terminée avec la commande :</p>
+
+<pre><code class="language-bash">helm repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com/
+</code></pre>
+
+<p>Pour Gogs on va utiliser le chart officiel <code>incubator</code> disponible <a href="https://github.com/kubernetes/charts/tree/master/incubator/gogs">ici</a>. Vous n’avez pas besoin de  cloner quoi que ce soit Helm va le faire pour vous. Par contre vous allez éventuellement avoir besoin du fichier <code>values.yaml</code> qui est là où on va mettre nos variables custom.</p>
+
+<p>Pour ma part mon fichier <code>values.yaml</code> ressemble à ça :</p>
+
+<pre><code class="language-yaml">## Override the name of the Chart.
+##
+# nameOverride:
+
+## Kubernetes configuration
+## For minikube, set this to NodePort, elsewhere use LoadBalancer
+##
+serviceType: NodePort
+
+replicaCount: 1
+
+image: gogs/gogs
+imageTag: latest
+imagePullPolicy: IfNotPresent
+
+service:
+  ## Override the components name (defaults to service).
+  ##
+  # nameOverride:
+
+  ## HTTP listen port.
+  ## ref: https://gogs.io/docs/advanced/configuration_cheat_sheet
+  ##
+  httpPort: 80
+
+  ## SSH listen port.
+  ## ref: https://gogs.io/docs/advanced/configuration_cheat_sheet
+  ##
+  sshPort: 2222
+
+  ## Gogs configuration values
+  ## ref: https://gogs.io/docs/advanced/configuration_cheat_sheet
+  ##
+  gogs:
+
+    ## Application name, can be your company or team name.
+    ##
+    appName: 'Gogs'
+
+    ## Either &quot;dev&quot;, &quot;prod&quot; or &quot;test&quot;.
+    ##
+    runMode: 'prod'
+
+    ## Force every new repository to be private.
+    ##
+    forcePrivate: false
+
+    ## Indicates whether or not to disable Git clone through HTTP/HTTPS. When
+    ## disabled, users can only perform Git operations via SSH.
+    ##
+    disableHttpGit: false
+
+    ## Indicates whether or not to enable repository file upload feature.
+    ##
+    repositoryUploadEnabled: true
+
+    ## File types that are allowed to be uploaded, e.g. image/jpeg|image/png.
+    ## Leave empty means allow any file typ
+    ##
+    repositoryUploadAllowedTypes:
+
+    ## Maximum size of each file in MB.
+    ##
+    repositoryUploadMaxFileSize: 3
+
+    ## Maximum number of files per upload.
+    ##
+    repositoryUploadMaxFiles: 10
+
+    ## Enable this to use captcha validation for registration.
+    ##
+    serviceEnableCaptcha: true
+
+    ## Users need to confirm e-mail for registration
+    ##
+    serviceRegisterEmailConfirm: false
+
+    ## Weather or not to allow users to register.
+    ##
+    serviceDisableRegistration: false
+
+    ## Weather or not sign in is required to view anything.
+    ##
+    serviceRequireSignInView: false
+
+    ## Mail notification
+    ##
+    serviceEnableNotifyMail: false
+
+    ## Either &quot;memory&quot;, &quot;redis&quot;, or &quot;memcache&quot;, default is &quot;memory&quot;
+    ##
+    cacheAdapter: memory
+
+    ## For &quot;memory&quot; only, GC interval in seconds, default is 60
+    ##
+    cacheInterval: 60
+
+    ## For &quot;redis&quot; and &quot;memcache&quot;, connection host address
+    ## redis: network=tcp,addr=:6379,password=macaron,db=0,pool_size=100,idle_timeout=180
+    ## memcache: `127.0.0.1:11211`
+    ##
+    cacheHost:
+
+    ## Enable this to use captcha validation for registration.
+    ##
+    serverDomain: git.home.local
+
+    ## Full public URL of Gogs server.
+    ##
+    serverRootUrl: https://git.home.local/
+
+    ## Landing page for non-logged users, can be &quot;home&quot; or &quot;explore&quot;
+    ##
+    serverLandingPage: home
+
+    ## Either &quot;mysql&quot;, &quot;postgres&quot; or &quot;sqlite3&quot;, you can connect to TiDB with
+    ## MySQL protocol.  Default is to use the postgresql configuration included
+    ## with this chart.
+    ##
+    databaseType: postgres
+
+    ## Database host.  Unused unless `postgresql.install` is false.
+    ##
+    databaseHost:
+
+    ## Database user.  Unused unless `postgresql.install` is false.
+    ##
+    databaseUser:
+
+    ## Database password.  Unused unless `postgresql.install` is false.
+    ##
+    databasePassword:
+
+    ## Database password.  Unused unless `postgresql.install` is false.
+    ##
+    databaseName:
+
+    ## Hook task queue length, increase if webhook shooting starts hanging
+    ##
+    webhookQueueLength: 1000
+
+    ## Deliver timeout in seconds
+    ##
+    webhookDeliverTimeout: 5
+
+    ## Allow insecure certification
+    ##
+    webhookSkipTlsVerify: true
+
+    ## Number of history information in each page
+    ##
+    webhookPagingNum: 10
+
+    ## Can be &quot;console&quot; and &quot;file&quot;, default is &quot;console&quot;
+    ## Use comma to separate multiple modes, e.g. &quot;console, file&quot;
+    ##
+    logMode: console
+
+    ## Either &quot;Trace&quot;, &quot;Info&quot;, &quot;Warn&quot;, &quot;Error&quot;, &quot;Fatal&quot;, default is &quot;Trace&quot;
+    ##
+    logLevel: Trace
+
+    ## Undocumented, but you can take a guess.
+    ##
+    otherShowFooterBranding: false
+
+    ## Show version information about Gogs and Go in the footer
+    ##
+    otherShowFooterVersion: true
+
+    ## Show time of template execution in the footer
+    ##
+    otherShowFooterTemplateLoadTime: true
+
+    ## Change this value for your installation.
+    ##
+    securitySecretKey: &quot;changeme&quot;
+
+    ## Number of repositories that are showed in one explore page
+    ##
+    uiExplorePagingNum: 20
+
+    ## Number of issues that are showed in one page
+    ##
+    uiIssuePagingNum: 10
+
+    ## Number of maximum commits showed in one activity feed.
+    ## NOTE: This value is also used in how many commits a webhook will send.
+    ##
+    uiFeedMaxCommitNum: 5
+
+  ## Ingress configuration.
+  ## ref: https://kubernetes.io/docs/user-guide/ingress/
+  ##
+  ingress:
+    ## Enable Ingress.
+    ##
+    enabled: true
+
+    ## Annotations.
+    ##
+    annotations:
+      kubernetes.io/ingress.class: traefik
+    #   kubernetes.io/tls-acme: 'true'
+
+    ## Hostnames.
+    ## Must be provided if Ingress is enabled.
+    ##
+    hosts:
+      - git.home.local
+
+    ## TLS configuration.
+    ## Secrets must be manually created in the namespace.
+    ##
+    tls:
+      - secretName: home
+        hosts:
+          - git.home.local
+
+
+## Persistent Volume Storage configuration.
+## ref: https://kubernetes.io/docs/user-guide/persistent-volumes
+##
+persistence:
+  ## Enable persistence using Persistent Volume Claims.
+  ##
+  enabled: true
+
+  ## gogs data Persistent Volume Storage Class
+  ## If defined, storageClassName: &lt;storageClass&gt;
+  ## If set to &quot;-&quot;, storageClassName: &quot;&quot;, which disables dynamic provisioning
+  ## If undefined (the default) or set to null, no storageClassName spec is
+  ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+  ##   GKE, AWS &amp; OpenStack)
+  ##
+  # storageClass: &quot;-&quot;
+
+  ## Persistent Volume Access Mode.
+  ##
+  accessMode: ReadWriteOnce
+
+  ## Persistent Volume Storage Size.
+  ##
+  size: 1Gi
+
+## Configuration values for the postgresql dependency.
+## ref: https://github.com/kubernetes/charts/blob/master/stable/postgresql/README.md
+##
+postgresql:
+
+  ### Install PostgreSQL dependency
+  ##
+  install: true
+
+  ### PostgreSQL User to create.
+  ##
+  postgresUser: gogs
+
+  ## PostgreSQL Password for the new user.
+  ## If not set, a random 10 characters password will be used.
+  ##
+  postgresPassword: gogs
+
+  ## PostgreSQL Database to create.
+  ##
+  postgresDatabase: gogs
+
+  ## Persistent Volume Storage configuration.
+  ## ref: https://kubernetes.io/docs/user-guide/persistent-volumes
+  ##
+  persistence:
+    ## Enable PostgreSQL persistence using Persistent Volume Claims.
+    ##
+    enabled: true
+
+    accessMode: ReadWriteOnce
+
+    size: 5Gi
+</code></pre>
+
+<p>Vient le moment de l’installation. Pour le stockage comme je vous l’ai dit j’utilise un <em>persistant volume</em> local, il faut donc commencer par le créer. On peut le faire en poussant ce genre manifest :</p>
+
+<pre><code class="language-yaml">---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: git-gogs-volume
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: /data/git
+  persistentVolumeReclaimPolicy: Delete
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: git-postgres-volume
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: /data/git
+  persistentVolumeReclaimPolicy: Delete
+</code></pre>
+
+<p>Vous pouvez changer la taille des espaces de stockage à votre convenance (moi j&rsquo;ai toujours un &ldquo;hyperviseur&rdquo; avec une configuration matérielle ridicule).</p>
+
+<p>Pour appliquer ce manifest, on fait classiquement :</p>
+
+<pre><code class="language-bash">kubectl apply -f peristantvolume.yml
+</code></pre>
+
+<p>On peut vérifier que tout s’est bien passé avec la commande (le status doit être <code>Available</code> pour l’instant ) :</p>
+
+<pre><code class="language-bash">kubectl get pv
+</code></pre>
+
+<pre><code class="language-bash">NAME                  CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                     STORAGECLASS   REASON    AGE
+git-gogs-volume       1Gi        RWO            Delete           Available                                                      13s
+git-postgres-volume   5Gi        RWO            Delete           Available
+</code></pre>
+
+<p>Très bien on a notre persistant volume et on a près de nous (dans le dossier courant) notre fichier <code>values.yaml</code> avec nos paramètres favoris. C’est le moment de lancer le Helm !</p>
+
+<pre><code class="language-bash">helm install -f values.yaml  incubator/gogs --namespace git -n git-gogs
+</code></pre>
+
+<p>Cette commande utilise donc le fichier <code>values.yaml</code>, le repository <code>incubator/gogs</code> et installe tout dans le namespace <code>git</code>. Enfin le nom de l’application sera <code>git-gogs</code>.</p>
+
+<p>Le résultat de la commande Helm doit vous faire un petit retour sur ce qu’il a fait. Notez que le status peut ne pas être tout de suite en <code>Running</code> car l’image doit être téléchargé et initialisé.</p>
+
+<p>En théorie quelques minutes plus tard vous devriez pouvoir vous connecter sur l’interface de Gogs sur le FQDN que vous avez précisé dans le fichier <code>values.yaml</code>. Et de un.</p>
+
+<h3 id="installation-de-drone">Installation de Drone</h3>
+
+<p>Pour l’installation de Drone c’est sensiblement la même chose. Vous renseignez votre fichier <code>values.yaml</code> et l’avantage c’est qu’il n’y a pas besoin de <em>persistant volume</em>.  Encore plus simple.</p>
+
+<p>Voici donc mon fichier <code>values.yaml</code> :</p>
+
+<pre><code class="language-yaml">image:
+  registry: docker.io
+  org: drone
+  server: drone
+  agent: drone
+  tag: 0.7
+  pullPolicy: IfNotPresent
+
+service:
+  http:
+    externalPort: 80
+    internalPort: 8000
+  type: ClusterIP
+
+ingress:
+  enabled: true
+  # enable TLS via kube-lego
+  tls: true
+  hostname: drone.home.local
+  secretName: home
+  annotations:
+    kubernetes.io/ingress.class: traefik
+
+server:
+  # Drone server configuration. Values in here get injected as environment variables.
+  # See http://readme.drone.io/admin/installation-reference#server-options for a list of possible values.
+  env:
+    DRONE_DEBUG: &quot;false&quot;
+    DRONE_DATABASE_DRIVER: &quot;sqlite3&quot;
+    DRONE_DATABASE_DATASOURCE: &quot;drone.sqlite&quot;
+    # Drone requires some environment variables to bootstrap the git service or it won't start up.
+    # Uncomment this and add your own custom configuration.
+    #
+    # See http://readme.drone.io/admin/installation-reference/ for more info on these envvars.
+    DRONE_PROVIDER: &quot;gogs&quot;
+    DRONE_OPEN: &quot;true&quot;
+    DRONE_GOGS: true
+    DRONE_GOGS_URL: https://git.home.local
+    DRONE_GOGS_SKIP_VERIFY: true
+    DRONE_ADMIN: &quot;matthieu&quot;
+  resources:
+    requests:
+      memory: 32Mi
+      cpu: 40m
+    limits:
+      memory: 1Gi
+      cpu: 1
+
+agent:
+  # Drone agent configuration. Values in here get injected as environment variables.
+  # See http://readme.drone.io/admin/installation-reference#server-options for a list of possible values.
+  env:
+    DRONE_DEBUG: &quot;false&quot;
+  resources:
+    requests:
+      memory: 32Mi
+      cpu: 40m
+    limits:
+      memory: 1Gi
+      cpu: 1
+
+# Uncomment this if you want to set a specific shared secret between
+# the agents and servers, otherwise this will be auto-generated.
+#shared_secret: supersecret
+</code></pre>
+
+<p>Pour l’installer j’utilise la commande :</p>
+
+<pre><code class="language-bash">helm install -f values.yaml incubator/drone --namespace git -n git-drone
+</code></pre>
+
+<p>Et de deux.</p>
+
+<h3 id="configuration">Configuration</h3>
+
+<p>Dernière étape, la configuration de Gogs et de Drone ensemble. En fait une bonne partie de la configuration a été faite durant l’installation de Drone. Il ne reste plus qu’à se logger sur Drone avec vos credentials de Gogs (Drone ne supporte pas encore Oauth2)  et le tour est joué. Enfin, vous devriez voir vos répositories Git dans l’interface de Drone.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>Enfin ! On a tout pour créer nos chaines CI/CD. Pfiou on va pas se mentir c’est pas mal de boulot pour arriver jusqu’ici mais tout de même on en a fait du chemin ! Désormais on va pouvoir vraiment facilement déployer de façon continue nos applications sur Kubernetes, de façon simple, scalable, et surtout automatique.
+Malheureusement l’application pratique du déploiement sera pour un autre article ! Stay tuned.</p>
+
+<p>Les articles de la série :</p>
+
+<ul>
+<li><a href="https://matthieugouel.github.io/blog/2018-05-14-developpement-continu-a-la-maison-partie-1/">Développement continu à la maison (partie 1)</a></li>
+<li><a href="https://matthieugouel.github.io/blog/2018-05-21-developpement-continu-a-la-maison-partie-2/">Développement continu à la maison (partie 2)</a></li>
+<li><a href="https://matthieugouel.github.io/blog/2018-06-04-developpement-continu-a-la-maison-partie-3/">Développement continu à la maison (partie 3)</a></li>
+<li><a href="https://matthieugouel.github.io/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/">Développement continu à la maison (partie 4)</a></li>
+</ul>
+
+  </div>
+
+  <footer>
+    <ul class="stats">
+    
+        
+
+        
+        
+            <li>
+                
+                
+                    
+
+                    
+                        Catégorie
+                    
+                
+            </li>
+        
+    
+
+    
+    
+        <li><a href='/categories/devops' lang="fr">DevOps</a></li>
+    
+</ul>
+
+  </footer>
+
+</article>
+
+    <article class="post">
+        <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "https-matthieugouel-github-io" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </article>
+
+
+<ul class="actions pagination">
+    
+        <li><a href="/blog/2018-06-05-developpement-continu-a-la-maison-partie-3/"
+                class="button big previous">Développement continu à la maison (partie 3)</a></li>
+    
+
+    
+        <li><a href="/blog/2018-07-24-presentation-de-gibica/"
+                class="button big next">Présentation de Gibica</a></li>
+    
+</ul>
+
+
+    </div>
+    
+<section id="sidebar">
+
+  
+  <section id="intro">
+    
+    
+    
+      <header>
+        <h2>Random Logs</h2>
+        <p>A collection of random thoughts</p>
+      </header>
+    
+    
+      <ul class="icons">
+        
+          
+    <li><a href="https://matthieugouel.github.io/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
+
+
+        
+        
+  <li><a href="//github.com/matthieugouel" target="_blank" title="GitHub" class="fa fa-github"></a></li>
+
+
+
+
+
+
+
+  <li><a href="//twitter.com/matthieugouel" target="_blank" title="Twitter" class="fa fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="//500px.com/matthieugouel" target="_blank" title="500px" class="fa fa-500px"></a></li>
+
+
+
+  <li><a href="//linkedin.com/in/matthieu-gouel-04005295" target="_blank" title="LinkedIn" class="fa fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="mailto:matthieu.gouel@gmail.com" title="Email" class="fa fa-envelope"></a></li>
+
+
+      </ul>
+    
+  </section>
+
+  
+  <section id="recent-posts">
+    <div class="mini-posts">
+      <header>
+        <h3>Posts récents</h3>
+      </header>
+      <div class="posts-container">
+        
+
+        
+          
+        
+
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/2018-11-22-oops-i-did-it-again/">Oops!... I Did It Again</a>
+              </h3>
+              
+              <time class="published" datetime='2018-11-22 00:00:00 &#43;0000 UTC'>
+              22-11-2018</time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-11-22-oops-i-did-it-again/" class="image featured">
+            <img src="/img/blog/dev.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/2018-07-24-presentation-de-gibica/">Présentation de Gibica</a>
+              </h3>
+              
+              <time class="published" datetime='2018-07-24 00:00:00 &#43;0000 UTC'>
+              24-07-2018</time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-07-24-presentation-de-gibica/" class="image featured">
+            <img src="/img/blog/dev.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/">Développement continu à la maison (partie 4)</a>
+              </h3>
+              
+              <time class="published" datetime='2018-06-27 00:00:00 &#43;0000 UTC'>
+              27-06-2018</time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/" class="image featured">
+            <img src="/img/blog/devops.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/2018-06-05-developpement-continu-a-la-maison-partie-3/">Développement continu à la maison (partie 3)</a>
+              </h3>
+              
+              <time class="published" datetime='2018-06-05 00:00:00 &#43;0000 UTC'>
+              05-06-2018</time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-06-05-developpement-continu-a-la-maison-partie-3/" class="image featured">
+            <img src="/img/blog/devops.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/2018-05-28-gerer-nos-certificats-ssl/">Gérer nos certificats SSL</a>
+              </h3>
+              
+              <time class="published" datetime='2018-05-28 00:00:00 &#43;0000 UTC'>
+              28-05-2018</time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-05-28-gerer-nos-certificats-ssl/" class="image featured">
+            <img src="/img/blog/devops.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+      </div>
+
+      
+        <a href=
+          
+            /blog/
+          
+        class="button">Voir plus</a>
+      
+    </div>
+  </section>
+
+  
+  
+  
+  
+  
+    <section id="categories">
+      <header>
+        <h3>
+          <a href="/fr/categories/">Catégories</a>
+        </h3>
+      </header>
+        
+          
+        
+
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/devops/">DevOps</a>
+                <span style="float:right;">4</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/projects/">Projects</a>
+                <span style="float:right;">4</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/d%C3%A9veloppement/">Développement</a>
+                <span style="float:right;">2</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/security/">Security</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+    </section>
+  
+  
+
+
+  
+  
+    <section id="mini-bio">
+      <h3>à propos</h3>
+      <p>Ce blog a pour but de partager mes pensées du moment ou ce que j'apprends au jour le jour. Ce n'est pas nécessairement quelque chose de très sérieux ou très élaboré, plutôt une succession de petites pensées aléatoires tirées de mon expérience personnelle.</p>
+      <a href="/about" class="button">En savoir plus</a>
+    </section>
+  
+
+  
+  <section id="footer">
+    
+      <ul class="icons">
+        
+          
+    <li><a href="https://matthieugouel.github.io/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
+
+
+        
+        
+  <li><a href="//github.com/matthieugouel" target="_blank" title="GitHub" class="fa fa-github"></a></li>
+
+
+
+
+
+
+
+  <li><a href="//twitter.com/matthieugouel" target="_blank" title="Twitter" class="fa fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="//500px.com/matthieugouel" target="_blank" title="500px" class="fa fa-500px"></a></li>
+
+
+
+  <li><a href="//linkedin.com/in/matthieu-gouel-04005295" target="_blank" title="LinkedIn" class="fa fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="mailto:matthieu.gouel@gmail.com" title="Email" class="fa fa-envelope"></a></li>
+
+
+      </ul>
+    
+    <p class="copyright">
+      
+        &copy; 2018
+        
+          Random Logs
+        
+      .
+      Powered by <a href="//gohugo.io" target="_blank">Hugo</a>
+    </p>
+  </section>
+</section>
+
+    </div>
+    <a id="back-to-top" href="#" class="fa fa-arrow-up fa-border fa-2x"></a>
+    
+
+    
+      
+    
+
+    
+      
+      
+      
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+        
+        
+        
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/css.min.js"></script>
+        <script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+      
+    
+    
+    
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script>
+      <script src="/js/util.js"></script>
+      <script src="/js/main.js"></script>
+      <script src="/js/backToTop.js"></script>
+    
+
+    
+      
+        
+      
+    
+
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
+

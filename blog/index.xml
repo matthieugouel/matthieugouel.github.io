@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on Random Logs</title>
+    <link>https://matthieugouel.github.io/blog/</link>
+    <description>Recent content in Blog on Random Logs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr</language>
+    <lastBuildDate>Thu, 22 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://matthieugouel.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Oops!... I Did It Again</title>
+      <link>https://matthieugouel.github.io/blog/2018-11-22-oops-i-did-it-again/</link>
+      <pubDate>Thu, 22 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://matthieugouel.github.io/blog/2018-11-22-oops-i-did-it-again/</guid>
+      <description>Oops!&amp;hellip; I Did It Again Il y a quelques mois je vous ai parlé de Gibica, mon tout premier interpréteur en Python. Eh bien en fait j’en ai fait un autre, cette fois ci en Rust, et il s’appelle Bjørn. Voilà.
+Mais enfin pourquoi s’infliger une telle peine ?! Sachant que ce second interpréteur m’a pris encore plus de temps à coder que le premier ?! C’est ce qu’on va voir aujourd’hui.</description>
+    </item>
+    
+    <item>
+      <title>Présentation de Gibica</title>
+      <link>https://matthieugouel.github.io/blog/2018-07-24-presentation-de-gibica/</link>
+      <pubDate>Tue, 24 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://matthieugouel.github.io/blog/2018-07-24-presentation-de-gibica/</guid>
+      <description>Depuis quelques semaines je m’intéresse beaucoup au fonctionnement des langages informatiques. Les utilisant quotidiennement depuis plusieurs années, j’ai rarement pris le temps d’étudier précisément comment ces langages sont pensés, construits et interprétés par nos machines. Bien sûr j’ai eu des cours de compilation en école d’ingénieur, mais j’ai beaucoup sous-estimé cette matière à l’époque, donc il ne m’en reste pas grand-chose (bouh !).
+Quand je souhaite vraiment apprendre quelque chose sur un sujet, ma technique est de trouver rapidement un objectif de réalisation qui me permette de valider mes compétences (vous remarquerez que j’ai rien inventé).</description>
+    </item>
+    
+    <item>
+      <title>Développement continu à la maison (partie 4)</title>
+      <link>https://matthieugouel.github.io/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://matthieugouel.github.io/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/</guid>
+      <description>Après avoir installé notre cluster Kubernetes nous avons configuré un reverse proxy et tout le nécessaire pour déployer convenablement des applications. Aujourd’hui nous allons installer ce qu’il faut pour enfin faire du déploiement continu. On va enfin pouvoir justifier le titre de la série !
+Notre stratégie d’intégration continue se doit d’être assez simple, du moins pour commencer. Exit Jenkins &amp;amp; Cie qui demandent beaucoup de ressources et une configuration non-négligeable.</description>
+    </item>
+    
+    <item>
+      <title>Développement continu à la maison (partie 3)</title>
+      <link>https://matthieugouel.github.io/blog/2018-06-05-developpement-continu-a-la-maison-partie-3/</link>
+      <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://matthieugouel.github.io/blog/2018-06-05-developpement-continu-a-la-maison-partie-3/</guid>
+      <description>Si vous avez suivi la partie précédente vous avez désormais un cluster Kubernetes tout neuf prêt à accueillir toutes nos applications. C’est génial mais il manque quelque chose.
+On l’a vu quand on a testé le cluster, l’application est accessible depuis le navigateur via l’adresse IP du master et un port aléatoire. Il faut avouer que ce n’est pas très pratique, nous on aimerait bien avoir un nom DNS associé à ce service pour pouvoir y accéder en HTTPS par exemple.</description>
+    </item>
+    
+    <item>
+      <title>Gérer nos certificats SSL</title>
+      <link>https://matthieugouel.github.io/blog/2018-05-28-gerer-nos-certificats-ssl/</link>
+      <pubDate>Mon, 28 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://matthieugouel.github.io/blog/2018-05-28-gerer-nos-certificats-ssl/</guid>
+      <description>Dans la série Développement continu à la maison (partie 1) nous allons mettre en place des services avec des endpoints en HTTPS sur Kubernetes. Pour ce faire nous avons bien évidemment besoin d’un certificat valide, celui-ci issu d’une autorité de certification valide.
+Il y a plusieurs moyens de se procurer de tels certificats.
+Acheter un certificat Alors oui on peut acheter un certificat à une autorité de certification ou bien à des revendeurs.</description>
+    </item>
+    
+    <item>
+      <title>Développement continu à la maison (partie 2)</title>
+      <link>https://matthieugouel.github.io/blog/2018-05-21-developpement-continu-a-la-maison-partie-2/</link>
+      <pubDate>Mon, 21 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://matthieugouel.github.io/blog/2018-05-21-developpement-continu-a-la-maison-partie-2/</guid>
+      <description>Et voilà nous y sommes. Après une longue introduction la fois précédente, aujourd’hui, on s’attaque enfin à la pratique ! Cet article a pour but d’installer notre cluster Kubernetes. C’est la première pierre à notre édifice (et non des moindres !) qui nous permettra ensuite d’installer tous nos services. Il s’agit donc de ne pas se rater !
+Ça tombe bien parce que Kubernetes possède une documentation très complète. Je n’ai pas vraiment envie de copier-coller la documentation officielle dans cet article c’est pourquoi je vais abuser de liens vers celle-ci.</description>
+    </item>
+    
+    <item>
+      <title>Développement continu à la maison (partie 1)</title>
+      <link>https://matthieugouel.github.io/blog/2018-05-14-developpement-continu-a-la-maison-partie-1/</link>
+      <pubDate>Mon, 14 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://matthieugouel.github.io/blog/2018-05-14-developpement-continu-a-la-maison-partie-1/</guid>
+      <description>Premier article du thème DevOps. Ce thème regroupera les articles parlant des sujets d’automatisation et de déploiement d’applications dans un environment de production. C’est vaste !
+Je vous propose dans cette série d’articles de construire pas à pas notre écosystème moderne de développement continu. Nous commencerons par installer un orchestrateur qui nous servira de fondations pour notre système. Sur ces fondations nous déploierons les services nécessaires pour faire de l’intégration continue comme un logiciel de gestion de version, un système de développement continu, des dépôts etc … Enfin, une fois tout ça fait il ne nous restera plus qu’à mettre en place notre workflow afin de déployer nos propres applications au sein même de notre orchestrateur.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,1582 @@
+<!DOCTYPE HTML>
+
+<html>
+    <head>
+        
+            
+                <title>Développement continu à la maison (partie 3)</title>
+            
+        
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="generator" content="Hugo 0.39" />
+        
+  
+    
+    
+  
+
+  
+
+  <link rel="apple-touch-icon-precomposed" href='/favicon/apple-touch-icon-precomposed-1.0.png'>
+  <link rel="icon" href='/favicon/favicon-1.0.png'>
+  
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content='/favicon/mstile-1.0.png'>
+  <meta name="application-name" content="Random Logs">
+  <meta name="msapplication-tooltip" content="A collection of random thoughts (fr).">
+  <meta name="msapplication-config" content='/favicon/ieconfig.xml'>
+
+
+
+        
+        
+            <meta name="description" content="Un reverse proxy avec Traefik">
+        
+
+        <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Développement continu à la maison (partie 3)"/>
+<meta name="twitter:description" content="Un reverse proxy avec Traefik"/>
+<meta name="twitter:site" content="@matthieugouel"/>
+
+        <meta name="twitter:site" content="@matthieugouel">
+        <meta name="twitter:creator" content="@matthieugouel">
+        
+        <meta name="twitter:title" content="Développement continu à la maison (partie 3)" />
+        <meta name="twitter:description" content="Un reverse proxy avec Traefik" />
+        
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="https://matthieugouel.github.io/img/main/logo.png" />
+        <meta property="og:title" content="Développement continu à la maison (partie 3)" />
+<meta property="og:description" content="Un reverse proxy avec Traefik" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://matthieugouel.github.io/blog/2018-06-05-developpement-continu-a-la-maison-partie-3/" />
+
+
+
+<meta property="article:published_time" content="2018-06-05T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2018-06-05T00:00:00&#43;00:00"/>
+
+<meta property="og:site_name" content="Random Logs" />
+
+
+
+
+
+
+
+
+
+
+        <meta property="og:image" content="https://matthieugouel.github.io/img/main/logo.png">
+        <meta property="og:image:type" content="image/png">
+        <meta property="og:image:width" content="512">
+        <meta property="og:image:height" content="256">
+        
+<meta itemprop="name" content="Développement continu à la maison (partie 3)">
+<meta itemprop="description" content="Un reverse proxy avec Traefik">
+
+
+<meta itemprop="datePublished" content="2018-06-05T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-06-05T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1343">
+
+
+
+<meta itemprop="keywords" content="Kubernetes," />
+
+        
+
+        
+            
+        
+
+        
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+            <link rel="stylesheet" href="/css/main.css">
+            <link rel="stylesheet" href="/css/add-on.css">
+            <link rel="stylesheet" href="/css/academicons.min.css">
+        
+
+        
+            
+                
+            
+        
+
+
+  
+    
+    <link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+  
+
+
+      
+    </head>
+    <body>
+
+      
+      <div id="wrapper">
+
+    
+    
+<header id="header">
+    
+      
+        <h1><a href="/">Blog</a></h1>
+      
+    
+
+    <nav class="links">
+        <ul>
+            
+                <li>
+                    <a href="/">
+                            <i class="fa fa-home">&nbsp;</i>Accueil
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/blog/">
+                            <i class="fa fa-newspaper-o">&nbsp;</i>Blog
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/projects/">
+                            <i class="fa fa-tasks">&nbsp;</i>Projets
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/categories/">
+                            <i class="fa fa-sitemap">&nbsp;</i>Catégories
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/contact/">
+                            <i class="fa fa-envelope-o">&nbsp;</i>Contact
+                    </a>
+                </li>
+            
+        </ul>
+    </nav>
+    <nav class="main">
+        <ul>
+            
+            <li id="share-nav" class="share-menu" style="display:none;">
+                <a class="fa-share-alt" href="#share-menu">Share</a>
+            </li>
+            
+            
+            <li class="search">
+                <a class="fa-search" href="#search">Search</a>
+                <form id="search" method="get" action="//google.com/search">
+                    <input type="text" name="q" placeholder="Search" />
+                    <input type="hidden" name="as_sitesearch" value="https://matthieugouel.github.io">
+                </form>
+            </li>
+            <li class="menu">
+                <a class="fa-bars" href="#menu">Menu</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+<section id="menu">
+
+    
+        <section>
+            <form class="search" method="get" action="//google.com/search">
+                <input type="text" name="q" placeholder="Search" />
+                <input type="hidden" name="as_sitesearch" value="https://matthieugouel.github.io">
+            </form>
+        </section>
+
+    
+        <section>
+            <ul class="links">
+                
+                    <li>
+                        <a href="/">
+                            <h3>
+                                <i class="fa fa-home">&nbsp;</i>Accueil
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/blog/">
+                            <h3>
+                                <i class="fa fa-newspaper-o">&nbsp;</i>Blog
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/projects/">
+                            <h3>
+                                <i class="fa fa-tasks">&nbsp;</i>Projets
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/">
+                            <h3>
+                                <i class="fa fa-sitemap">&nbsp;</i>Catégories
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/contact/">
+                            <h3>
+                                <i class="fa fa-envelope-o">&nbsp;</i>Contact
+                            </h3>
+                        </a>
+                    </li>
+                
+            </ul>
+        </section>
+
+    
+        <section id="recent-posts">
+            <div class="mini-posts">
+                <header>
+                    <h3>Posts récents</h3>
+                </header>
+                
+
+                
+                    
+                
+
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/2018-11-22-oops-i-did-it-again/">Oops!... I Did It Again</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2018-11-22'>
+                                    22-11-2018</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-11-22-oops-i-did-it-again/" class="image featured">
+            <img src="/img/blog/dev.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/2018-07-24-presentation-de-gibica/">Présentation de Gibica</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2018-07-24'>
+                                    24-07-2018</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-07-24-presentation-de-gibica/" class="image featured">
+            <img src="/img/blog/dev.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/">Développement continu à la maison (partie 4)</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2018-06-27'>
+                                    27-06-2018</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/" class="image featured">
+            <img src="/img/blog/devops.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/2018-06-05-developpement-continu-a-la-maison-partie-3/">Développement continu à la maison (partie 3)</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2018-06-05'>
+                                    05-06-2018</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-06-05-developpement-continu-a-la-maison-partie-3/" class="image featured">
+            <img src="/img/blog/devops.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/2018-05-28-gerer-nos-certificats-ssl/">Gérer nos certificats SSL</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2018-05-28'>
+                                    28-05-2018</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-05-28-gerer-nos-certificats-ssl/" class="image featured">
+            <img src="/img/blog/devops.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+
+                
+                    <a href=
+                        
+                            /blog/
+                        
+                        class="button">Voir plus</a>
+                
+            </div>
+        </section>
+
+    
+        
+</section>
+
+    <section id="share-menu">
+    <section id="social-share-nav">
+        <ul class="links">
+            <header>
+                <h3>Partager ce post <i class="fa fa-smile-o"></i></h3>
+            </header>
+            
+
+
+<li>
+  <a href="//twitter.com/share?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-05-developpement-continu-a-la-maison-partie-3%2f&amp;text=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%203%29&amp;via=matthieugouel" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+<li>
+  <a href="//plus.google.com/share?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-05-developpement-continu-a-la-maison-partie-3%2f" target="_blank" class="share-btn google-plus">
+    <i class="fa fa-google-plus"></i>
+    <p>Google+</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-05-developpement-continu-a-la-maison-partie-3%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+<li>
+  <a href="//reddit.com/submit?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-05-developpement-continu-a-la-maison-partie-3%2f&amp;title=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%203%29" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-05-developpement-continu-a-la-maison-partie-3%2f&amp;title=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%203%29" target="_blank" class="share-btn linkedin">
+      <i class="fa fa-linkedin"></i>
+      <p>LinkedIn</p>
+    </a>
+</li>
+
+
+<li>
+  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-05-developpement-continu-a-la-maison-partie-3%2f&amp;title=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%203%29" target="_blank" class="share-btn stumbleupon">
+    <i class="fa fa-stumbleupon"></i>
+    <p>StumbleUpon</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-05-developpement-continu-a-la-maison-partie-3%2f&amp;description=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%203%29" target="_blank" class="share-btn pinterest">
+    <i class="fa fa-pinterest-p"></i>
+    <p>Pinterest</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by &amp;body=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-05-developpement-continu-a-la-maison-partie-3%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+        </ul>
+    </section>
+</section>
+
+    
+    <div id="main">
+        
+        
+        <article class="post">
+  <header>
+    <div class="title">
+        
+            <h1><a href="/blog/2018-06-05-developpement-continu-a-la-maison-partie-3/">Développement continu à la maison (partie 3)</a></h1>
+            
+        
+        
+            <p>Un reverse proxy avec Traefik</p>
+        
+    </div>
+    <div class="meta">
+        <time class="published"
+            datetime='2018-06-05 00:00:00 &#43;0000 UTC'>
+            05-06-2018</time>
+        <span class="author"></span>
+        
+            <p>7 minutes</p>
+        
+    </div>
+</header>
+
+
+  
+    <section id="social-share">
+      <ul class="icons">
+        
+
+
+<li>
+  <a href="//twitter.com/share?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-05-developpement-continu-a-la-maison-partie-3%2f&amp;text=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%203%29&amp;via=matthieugouel" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+<li>
+  <a href="//plus.google.com/share?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-05-developpement-continu-a-la-maison-partie-3%2f" target="_blank" class="share-btn google-plus">
+    <i class="fa fa-google-plus"></i>
+    <p>Google+</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-05-developpement-continu-a-la-maison-partie-3%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+<li>
+  <a href="//reddit.com/submit?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-05-developpement-continu-a-la-maison-partie-3%2f&amp;title=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%203%29" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-05-developpement-continu-a-la-maison-partie-3%2f&amp;title=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%203%29" target="_blank" class="share-btn linkedin">
+      <i class="fa fa-linkedin"></i>
+      <p>LinkedIn</p>
+    </a>
+</li>
+
+
+<li>
+  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-05-developpement-continu-a-la-maison-partie-3%2f&amp;title=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%203%29" target="_blank" class="share-btn stumbleupon">
+    <i class="fa fa-stumbleupon"></i>
+    <p>StumbleUpon</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-05-developpement-continu-a-la-maison-partie-3%2f&amp;description=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%203%29" target="_blank" class="share-btn pinterest">
+    <i class="fa fa-pinterest-p"></i>
+    <p>Pinterest</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by &amp;body=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-06-05-developpement-continu-a-la-maison-partie-3%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+      </ul>
+    </section>
+  
+
+  
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-06-05-developpement-continu-a-la-maison-partie-3/" class="image featured">
+            <img src="/img/blog/devops.jpg" alt="">
+        </a>
+    
+
+
+  <div id="content">
+    
+
+<p>Si vous avez suivi la partie précédente vous avez désormais un cluster Kubernetes tout neuf prêt à accueillir toutes nos applications. C’est génial mais il manque quelque chose.</p>
+
+<!-- more -->
+
+<p>On l’a vu quand on a testé le cluster, l’application est accessible depuis le navigateur via l’adresse IP du <strong>master</strong> et un port aléatoire. Il faut avouer que ce n’est pas très pratique, nous on aimerait bien avoir un nom DNS associé à ce service pour pouvoir y accéder en HTTPS par exemple. De plus on voudrait profiter de la possibilité de multiplier les instances de l’application et ainsi répartir la charge entre ces plusieurs instances, tout en ayant qu’un seul point d’entrée.</p>
+
+<p>Eh bien le but d’aujourd’hui est de faire exactement ça. Et pour cela nous allons avoir besoin de:</p>
+
+<ul>
+<li>un serveur DNS</li>
+<li>un certificat SSL pour signer nos connexions HTTPS</li>
+<li>un reverse proxy</li>
+</ul>
+
+<h3 id="le-serveur-dns">Le serveur DNS</h3>
+
+<p>Alors celui-là on en a déjà fait mention dans la partie précédente. Je vous disais que j’ai un serveur DNS à côté de mon cluster qui me permet d’atteindre les noeuds avec un nom (comme par exemple <code>master.home.local</code>, <code>worker1.home.local</code>, …). Je vous disais également que ce n’était pas très dur d’installer un serveur DNS chez soi et que j’en reparlerais une autre fois. Aujourd’hui je vais … vous dire exactement la même chose. Je ferais un article pour présenter tous les services d’infrastructure qui tournent sur mon réseau, mais ce sera pour une autre fois. Pour l’instant Il faudra donc vous débrouiller pour mettre en place un serveur DNS chez vous.</p>
+
+<p>Quelques pistes tout de même :</p>
+
+<ul>
+<li>BIND est de loin le serveur DNS le plus utilisé sous Linux</li>
+<li>Peut-être que votre box internet peut également faire office de serveur DNS</li>
+<li>Si vous avez un NAS style Synology, ils permettent parfois de mettre en place un serveur DNS très simplement</li>
+</ul>
+
+<p>En tout cas pour chaque nouveau service on voudra donc ajouter un nom DNS propre à celui-ci. Ce nom DNS pointera à chaque fois sur l’adresse IP du noeud <strong>master</strong> de Kubernetes.</p>
+
+<h3 id="le-certificat-ssl">Le certificat SSL</h3>
+
+<p>Ici vous l’aurez compris on va utiliser <a href="https://matthieugouel.github.io/blog/2018-05-28-gerer-nos-certificats-ssl/">l&rsquo;article précédent</a> qui explique justement comment créer et gérer nos certificats. Si ce n’est pas déjà fait je vous retrouve donc après la lecture… c’est bon ? Super.</p>
+
+<h3 id="le-reverse-proxy">Le reverse proxy</h3>
+
+<p>C’est ici que cela devient intéressant. On va donc utiliser <a href="https://traefik.io/">Træfik</a> qui va nous servir de reverse proxy et de load balancer.  Il va prendre en entrée la requête HTTP/HTTPS de l’utilisateur, la désencapsuler et rediriger celle-ci vers le <em>pod</em> adéquat. Si l’application possède plusieurs pods pour faire de la redondance, Traefik va répartir la charge entre ces différents pods.</p>
+
+<p><img src="https://docs.traefik.io/img/architecture.png" alt="Traefik" />
+<p style="text-align:right";><em>(source : <a href="https://docs.traefik.io/">https://docs.traefik.io/</a>)</em></p></p>
+
+<p>On peut très bien installer Traefik à l’extérieur du cluster, mais bon on en a un alors pourquoi ne pas en profiter ? On va donc installer Traefik via un manifest comme n’importe quelle application.</p>
+
+<blockquote>
+<p>Une raison de ne pas installer Traefik dans notre cluster serait d’optimiser les performances. Traefik va être assez chargé car il doit traiter toutes les requêtes qui atteignent le cluster. C’est donc une bonne idée de le mettre sur une machine costaude et indépendante du cluster. Après, comment vous allez le voir tout de suite, Traefik lui-même peut être réparti sur plusieurs instances dans le cluster, et peut donc aussi profiter des fonctionnalités de scaling, de résilience et  d’automatisation de Kubernetes. C’est un choix !</p>
+</blockquote>
+
+<p>Avant d’installer Traefik sur notre cluster nous allons avoir besoin de rajouter le certificat généré dans le paragraphe précédent en tant que secret dans notre cluster. Et pour faire cela nous allons devoir créer le namespace <em>traefik</em>.</p>
+
+<pre><code class="language-bash">kubectl create namespace traefik
+</code></pre>
+
+<p>Ensuite, il faut créer le secret en lui-même. Ça se fait en une ligne avec cette commande (attention vous devez être dans le même répertoire que votre couple clé/certificat et évidement que les noms correspondent).</p>
+
+<pre><code class="language-bash">kubectl create secret tls home --cert=home.local.crt --key=device.key -n traefik
+</code></pre>
+
+<p>Il est aussi possible de faire en sorte que Traefik génère un certificat let&rsquo;s encrypt à l&rsquo;installation. Pour cela il faut modifier la configuration du <code>traefik.toml</code> dans le <em>configmap</em> du manifest afin de rajouter les options ACME (voir <a href="https://docs.traefik.io/configuration/acme/">ici</a> pour plus d’info).</p>
+
+<p>Ensuite c’est bon on va pouvoir installer Traefik. Je vous propose de partir de ce manifest qui est celui qui correspond à ma propre configuration. A vous de l’adapter à la vôtre !</p>
+
+<pre><code class="language-yaml">---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: traefik
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: traefik-ingress-controller
+rules:
+- apiGroups:
+  - &quot;&quot;
+  resources: [&quot;configmaps&quot;,&quot;secrets&quot;,&quot;endpoints&quot;,&quot;events&quot;,&quot;services&quot;]
+  verbs: [&quot;list&quot;,&quot;watch&quot;,&quot;create&quot;,&quot;update&quot;,&quot;delete&quot;,&quot;get&quot;]
+- apiGroups:
+  - &quot;&quot;
+  - &quot;extensions&quot;
+  resources: [&quot;services&quot;,&quot;nodes&quot;,&quot;ingresses&quot;,&quot;pods&quot;,&quot;ingresses/status&quot;]
+  verbs: [&quot;list&quot;,&quot;watch&quot;,&quot;create&quot;,&quot;update&quot;,&quot;delete&quot;,&quot;get&quot;]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: traefik-ingress-controller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: traefik-ingress-controller
+subjects:
+- kind: ServiceAccount
+  name: traefik-ingress-controller
+  namespace: traefik
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: traefik-ingress-controller
+  namespace: traefik
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: traefik-conf
+  namespace: traefik
+data:
+  traefik.toml: |-
+    defaultEntryPoints = [&quot;http&quot;,&quot;https&quot;]
+    [entryPoints]
+      [entryPoints.http]
+      address = &quot;:80&quot;
+        [entryPoints.http.redirect]
+        entryPoint = &quot;https&quot;
+      [entryPoints.https]
+      address = &quot;:443&quot;
+        [entryPoints.https.tls]
+          [[entryPoints.https.tls.certificates]]
+          CertFile = &quot;/ssl/tls.crt&quot;
+          KeyFile = &quot;/ssl/tls.key&quot;
+    [web]
+    address = &quot;:8080&quot;
+---
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: traefik-ingress-controller
+  namespace: traefik
+  labels:
+    k8s-app: traefik-ingress-lb
+    kubernetes.io/cluster-service: &quot;true&quot;
+spec:
+  template:
+     metadata:
+       labels:
+         k8s-app: traefik-ingress-lb
+         name: traefik-ingress-lb
+     spec:
+       hostNetwork: true
+       serviceAccountName: traefik-ingress-controller
+       terminationGracePeriodSeconds: 60
+       volumes:
+       - name: ssl
+         secret:
+           secretName: home
+       - name: config
+         configMap:
+           name: traefik-conf
+       tolerations:
+       - key: node-role.kubernetes.io/master
+         effect: NoSchedule
+       containers:
+       - image: traefik:v1.3.1
+         name: traefik-ingress-lb
+         imagePullPolicy: Always
+         volumeMounts:
+         - mountPath: &quot;/ssl&quot;
+           name: &quot;ssl&quot;
+         - mountPath: &quot;/config&quot;
+           name: &quot;config&quot;
+         resources:
+           requests:
+             cpu: 100m
+             memory: 20Mi
+         ports:
+         - containerPort: 80
+         - containerPort: 443
+         args:
+         - --kubernetes
+         - --configfile=/config/traefik.toml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: traefik-web-ui
+  namespace: traefik
+spec:
+  selector:
+    k8s-app: traefik-ingress-lb
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-web-ui
+  namespace: traefik
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  tls:
+  - secretName: home
+  rules:
+  - host: &quot;traefik.home.local&quot;
+    http:
+      paths:
+      - backend:
+          serviceName: traefik-web-ui
+          servicePort: http
+</code></pre>
+
+<p>Si rien ne change, vous pouvez utiliser directement ce manifest en faisant la commande suivante :</p>
+
+<pre><code class="language-bash">kubectl apply -f https://raw.githubusercontent.com/MatthieuGouel/k8s-manifests/master/traefik/traefik.yml
+</code></pre>
+
+<p>Enfin on va tout de même avoir envie de tester tout ça avec une « vraie » application, non ? Je vous ai préparé un second manifest qui met en place un serveur Nginx.</p>
+
+<pre><code class="language-yaml">---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: health
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: nginx-health
+  namespace: health
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 1
+  template:
+    metadata:
+        labels:
+          app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-health
+  namespace: health
+  labels:
+    app: nginx
+spec:
+  ports:
+  - name: http
+    port: 80
+  selector:
+    app: nginx
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-health
+  namespace: health
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  tls:
+  - secretName: home
+  rules:
+  - host: health.home.local
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginx-health
+          servicePort: http
+</code></pre>
+
+<p>Vous pouvez voir à la fin du manifest qu’il y a également un <em>ingress</em> qui pointe vers l’adresse <code>health.home.local</code> mais vous pouvez bien sûr modifier ce nom à votre convenance.</p>
+
+<p>Après avoir appliqué la configuration avec la commande (toujours si rien ne change pour vous) :</p>
+
+<pre><code class="language-bash">kubectl apply -f https://raw.githubusercontent.com/matthieugouel/kubernetes-manifests/master/nginx-health/nginx-health.yml
+</code></pre>
+
+<p>Vous devriez normalement voir cette application sur le dashboard Traefik à l’adresse que vous avez renseignée lors de l’installation de celui-ci dans l’ingress (pour moi c’est <code>traefik.home.local</code>). Enfin vous pourrez accéder à l’application via le nom DNS de l’application nginx-health (pour moi <code>health.home.local</code>). N’oubliez pas de déclarer ces noms dans le DNS bien sûr.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>On ne dirait pas comme ça mais c’est un article assez dense ! Le jeu en vaut la chandelle car maintenant on a vraiment tout ce qu’il faut pour déployer des applications sur Kubernetes. On aurait pu s’arrêter là si la série s’appelait « installation d’un cluster kubernetes à la maison » mais on va aller encore plus loin car désormais le but va être d’automatiser le déploiement de nos applications de façon continue sur notre cluster. On va faire du vrai DevOps quoi !</p>
+
+<p>Les articles de la série :</p>
+
+<ul>
+<li><a href="https://matthieugouel.github.io/blog/2018-05-14-developpement-continu-a-la-maison-partie-1/">Développement continu à la maison (partie 1)</a></li>
+<li><a href="https://matthieugouel.github.io/blog/2018-05-21-developpement-continu-a-la-maison-partie-2/">Développement continu à la maison (partie 2)</a></li>
+<li><a href="https://matthieugouel.github.io/blog/2018-06-04-developpement-continu-a-la-maison-partie-3/">Développement continu à la maison (partie 3)</a></li>
+<li><a href="https://matthieugouel.github.io/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/">Développement continu à la maison (partie 4)</a></li>
+</ul>
+
+  </div>
+
+  <footer>
+    <ul class="stats">
+    
+        
+
+        
+        
+            <li>
+                
+                
+                    
+
+                    
+                        Catégorie
+                    
+                
+            </li>
+        
+    
+
+    
+    
+        <li><a href='/categories/devops' lang="fr">DevOps</a></li>
+    
+</ul>
+
+  </footer>
+
+</article>
+
+    <article class="post">
+        <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "https-matthieugouel-github-io" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </article>
+
+
+<ul class="actions pagination">
+    
+        <li><a href="/blog/2018-05-28-gerer-nos-certificats-ssl/"
+                class="button big previous">Gérer nos certificats SSL</a></li>
+    
+
+    
+        <li><a href="/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/"
+                class="button big next">Développement continu à la maison (partie 4)</a></li>
+    
+</ul>
+
+
+    </div>
+    
+<section id="sidebar">
+
+  
+  <section id="intro">
+    
+    
+    
+      <header>
+        <h2>Random Logs</h2>
+        <p>A collection of random thoughts</p>
+      </header>
+    
+    
+      <ul class="icons">
+        
+          
+    <li><a href="https://matthieugouel.github.io/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
+
+
+        
+        
+  <li><a href="//github.com/matthieugouel" target="_blank" title="GitHub" class="fa fa-github"></a></li>
+
+
+
+
+
+
+
+  <li><a href="//twitter.com/matthieugouel" target="_blank" title="Twitter" class="fa fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="//500px.com/matthieugouel" target="_blank" title="500px" class="fa fa-500px"></a></li>
+
+
+
+  <li><a href="//linkedin.com/in/matthieu-gouel-04005295" target="_blank" title="LinkedIn" class="fa fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="mailto:matthieu.gouel@gmail.com" title="Email" class="fa fa-envelope"></a></li>
+
+
+      </ul>
+    
+  </section>
+
+  
+  <section id="recent-posts">
+    <div class="mini-posts">
+      <header>
+        <h3>Posts récents</h3>
+      </header>
+      <div class="posts-container">
+        
+
+        
+          
+        
+
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/2018-11-22-oops-i-did-it-again/">Oops!... I Did It Again</a>
+              </h3>
+              
+              <time class="published" datetime='2018-11-22 00:00:00 &#43;0000 UTC'>
+              22-11-2018</time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-11-22-oops-i-did-it-again/" class="image featured">
+            <img src="/img/blog/dev.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/2018-07-24-presentation-de-gibica/">Présentation de Gibica</a>
+              </h3>
+              
+              <time class="published" datetime='2018-07-24 00:00:00 &#43;0000 UTC'>
+              24-07-2018</time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-07-24-presentation-de-gibica/" class="image featured">
+            <img src="/img/blog/dev.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/">Développement continu à la maison (partie 4)</a>
+              </h3>
+              
+              <time class="published" datetime='2018-06-27 00:00:00 &#43;0000 UTC'>
+              27-06-2018</time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/" class="image featured">
+            <img src="/img/blog/devops.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/2018-06-05-developpement-continu-a-la-maison-partie-3/">Développement continu à la maison (partie 3)</a>
+              </h3>
+              
+              <time class="published" datetime='2018-06-05 00:00:00 &#43;0000 UTC'>
+              05-06-2018</time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-06-05-developpement-continu-a-la-maison-partie-3/" class="image featured">
+            <img src="/img/blog/devops.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/2018-05-28-gerer-nos-certificats-ssl/">Gérer nos certificats SSL</a>
+              </h3>
+              
+              <time class="published" datetime='2018-05-28 00:00:00 &#43;0000 UTC'>
+              28-05-2018</time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-05-28-gerer-nos-certificats-ssl/" class="image featured">
+            <img src="/img/blog/devops.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+      </div>
+
+      
+        <a href=
+          
+            /blog/
+          
+        class="button">Voir plus</a>
+      
+    </div>
+  </section>
+
+  
+  
+  
+  
+  
+    <section id="categories">
+      <header>
+        <h3>
+          <a href="/fr/categories/">Catégories</a>
+        </h3>
+      </header>
+        
+          
+        
+
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/devops/">DevOps</a>
+                <span style="float:right;">4</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/projects/">Projects</a>
+                <span style="float:right;">4</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/d%C3%A9veloppement/">Développement</a>
+                <span style="float:right;">2</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/security/">Security</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+    </section>
+  
+  
+
+
+  
+  
+    <section id="mini-bio">
+      <h3>à propos</h3>
+      <p>Ce blog a pour but de partager mes pensées du moment ou ce que j'apprends au jour le jour. Ce n'est pas nécessairement quelque chose de très sérieux ou très élaboré, plutôt une succession de petites pensées aléatoires tirées de mon expérience personnelle.</p>
+      <a href="/about" class="button">En savoir plus</a>
+    </section>
+  
+
+  
+  <section id="footer">
+    
+      <ul class="icons">
+        
+          
+    <li><a href="https://matthieugouel.github.io/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
+
+
+        
+        
+  <li><a href="//github.com/matthieugouel" target="_blank" title="GitHub" class="fa fa-github"></a></li>
+
+
+
+
+
+
+
+  <li><a href="//twitter.com/matthieugouel" target="_blank" title="Twitter" class="fa fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="//500px.com/matthieugouel" target="_blank" title="500px" class="fa fa-500px"></a></li>
+
+
+
+  <li><a href="//linkedin.com/in/matthieu-gouel-04005295" target="_blank" title="LinkedIn" class="fa fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="mailto:matthieu.gouel@gmail.com" title="Email" class="fa fa-envelope"></a></li>
+
+
+      </ul>
+    
+    <p class="copyright">
+      
+        &copy; 2018
+        
+          Random Logs
+        
+      .
+      Powered by <a href="//gohugo.io" target="_blank">Hugo</a>
+    </p>
+  </section>
+</section>
+
+    </div>
+    <a id="back-to-top" href="#" class="fa fa-arrow-up fa-border fa-2x"></a>
+    
+
+    
+      
+    
+
+    
+      
+      
+      
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+        
+        
+        
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/css.min.js"></script>
+        <script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+      
+    
+    
+    
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script>
+      <script src="/js/util.js"></script>
+      <script src="/js/main.js"></script>
+      <script src="/js/backToTop.js"></script>
+    
+
+    
+      
+        
+      
+    
+
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
+

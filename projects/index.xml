@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on Random Logs</title>
+    <link>https://matthieugouel.github.io/projects/</link>
+    <description>Recent content in Projects on Random Logs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr</language>
+    <lastBuildDate>Thu, 22 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://matthieugouel.github.io/projects/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Bjørn interpreter</title>
+      <link>https://matthieugouel.github.io/projects/2018-11-22-bjorn/</link>
+      <pubDate>Thu, 22 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://matthieugouel.github.io/projects/2018-11-22-bjorn/</guid>
+      <description>Bjørn https://github.com/matthieugouel/bjorn</description>
+    </item>
+    
+    <item>
+      <title>Gibica interpreter</title>
+      <link>https://matthieugouel.github.io/projects/2018-06-10-gibica/</link>
+      <pubDate>Sun, 10 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://matthieugouel.github.io/projects/2018-06-10-gibica/</guid>
+      <description>Gibica https://github.com/matthieugouel/gibica</description>
+    </item>
+    
+    <item>
+      <title>Python Package Skeleton</title>
+      <link>https://matthieugouel.github.io/projects/2018-06-07-python-package-skeleton/</link>
+      <pubDate>Thu, 07 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://matthieugouel.github.io/projects/2018-06-07-python-package-skeleton/</guid>
+      <description>Python Package Skeleton https://github.com/matthieugouel/python-package-skeleton</description>
+    </item>
+    
+    <item>
+      <title>Python Flask API Skeleton</title>
+      <link>https://matthieugouel.github.io/projects/2018-01-02-python-flask-api-skeleton/</link>
+      <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://matthieugouel.github.io/projects/2018-01-02-python-flask-api-skeleton/</guid>
+      <description>Python Flask API Skeleton https://github.com/matthieugouel/python-flask-api-skeleton</description>
+    </item>
+    
+  </channel>
+</rss>

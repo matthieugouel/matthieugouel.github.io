@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Développement on Random Logs</title>
+    <link>https://matthieugouel.github.io/categories/d%C3%A9veloppement/</link>
+    <description>Recent content in Développement on Random Logs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr</language>
+    <lastBuildDate>Thu, 22 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://matthieugouel.github.io/categories/d%C3%A9veloppement/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Oops!... I Did It Again</title>
+      <link>https://matthieugouel.github.io/blog/2018-11-22-oops-i-did-it-again/</link>
+      <pubDate>Thu, 22 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://matthieugouel.github.io/blog/2018-11-22-oops-i-did-it-again/</guid>
+      <description>Oops!&amp;hellip; I Did It Again Il y a quelques mois je vous ai parlé de Gibica, mon tout premier interpréteur en Python. Eh bien en fait j’en ai fait un autre, cette fois ci en Rust, et il s’appelle Bjørn. Voilà.
+Mais enfin pourquoi s’infliger une telle peine ?! Sachant que ce second interpréteur m’a pris encore plus de temps à coder que le premier ?! C’est ce qu’on va voir aujourd’hui.</description>
+    </item>
+    
+    <item>
+      <title>Présentation de Gibica</title>
+      <link>https://matthieugouel.github.io/blog/2018-07-24-presentation-de-gibica/</link>
+      <pubDate>Tue, 24 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://matthieugouel.github.io/blog/2018-07-24-presentation-de-gibica/</guid>
+      <description>Depuis quelques semaines je m’intéresse beaucoup au fonctionnement des langages informatiques. Les utilisant quotidiennement depuis plusieurs années, j’ai rarement pris le temps d’étudier précisément comment ces langages sont pensés, construits et interprétés par nos machines. Bien sûr j’ai eu des cours de compilation en école d’ingénieur, mais j’ai beaucoup sous-estimé cette matière à l’époque, donc il ne m’en reste pas grand-chose (bouh !).
+Quand je souhaite vraiment apprendre quelque chose sur un sujet, ma technique est de trouver rapidement un objectif de réalisation qui me permette de valider mes compétences (vous remarquerez que j’ai rien inventé).</description>
+    </item>
+    
+  </channel>
+</rss>

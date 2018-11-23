@@ -1,0 +1,1365 @@
+<!DOCTYPE HTML>
+
+<html>
+    <head>
+        
+            
+                <title>Développement continu à la maison (partie 1)</title>
+            
+        
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="generator" content="Hugo 0.39" />
+        
+  
+    
+    
+  
+
+  
+
+  <link rel="apple-touch-icon-precomposed" href='/favicon/apple-touch-icon-precomposed-1.0.png'>
+  <link rel="icon" href='/favicon/favicon-1.0.png'>
+  
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content='/favicon/mstile-1.0.png'>
+  <meta name="application-name" content="Random Logs">
+  <meta name="msapplication-tooltip" content="A collection of random thoughts (fr).">
+  <meta name="msapplication-config" content='/favicon/ieconfig.xml'>
+
+
+
+        
+        
+            <meta name="description" content="Introduction">
+        
+
+        <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Développement continu à la maison (partie 1)"/>
+<meta name="twitter:description" content="Introduction"/>
+<meta name="twitter:site" content="@matthieugouel"/>
+
+        <meta name="twitter:site" content="@matthieugouel">
+        <meta name="twitter:creator" content="@matthieugouel">
+        
+        <meta name="twitter:title" content="Développement continu à la maison (partie 1)" />
+        <meta name="twitter:description" content="Introduction" />
+        
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="https://matthieugouel.github.io/img/main/logo.png" />
+        <meta property="og:title" content="Développement continu à la maison (partie 1)" />
+<meta property="og:description" content="Introduction" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://matthieugouel.github.io/blog/2018-05-14-developpement-continu-a-la-maison-partie-1/" />
+
+
+
+<meta property="article:published_time" content="2018-05-14T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2018-05-14T00:00:00&#43;00:00"/>
+
+<meta property="og:site_name" content="Random Logs" />
+
+
+
+
+
+
+
+
+
+
+        <meta property="og:image" content="https://matthieugouel.github.io/img/main/logo.png">
+        <meta property="og:image:type" content="image/png">
+        <meta property="og:image:width" content="512">
+        <meta property="og:image:height" content="256">
+        
+<meta itemprop="name" content="Développement continu à la maison (partie 1)">
+<meta itemprop="description" content="Introduction">
+
+
+<meta itemprop="datePublished" content="2018-05-14T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-05-14T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1108">
+
+
+
+<meta itemprop="keywords" content="Kubernetes," />
+
+        
+
+        
+            
+        
+
+        
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+            <link rel="stylesheet" href="/css/main.css">
+            <link rel="stylesheet" href="/css/add-on.css">
+            <link rel="stylesheet" href="/css/academicons.min.css">
+        
+
+        
+            
+                
+            
+        
+
+
+  
+    
+    <link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+  
+
+
+      
+    </head>
+    <body>
+
+      
+      <div id="wrapper">
+
+    
+    
+<header id="header">
+    
+      
+        <h1><a href="/">Blog</a></h1>
+      
+    
+
+    <nav class="links">
+        <ul>
+            
+                <li>
+                    <a href="/">
+                            <i class="fa fa-home">&nbsp;</i>Accueil
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/blog/">
+                            <i class="fa fa-newspaper-o">&nbsp;</i>Blog
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/projects/">
+                            <i class="fa fa-tasks">&nbsp;</i>Projets
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/categories/">
+                            <i class="fa fa-sitemap">&nbsp;</i>Catégories
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/contact/">
+                            <i class="fa fa-envelope-o">&nbsp;</i>Contact
+                    </a>
+                </li>
+            
+        </ul>
+    </nav>
+    <nav class="main">
+        <ul>
+            
+            <li id="share-nav" class="share-menu" style="display:none;">
+                <a class="fa-share-alt" href="#share-menu">Share</a>
+            </li>
+            
+            
+            <li class="search">
+                <a class="fa-search" href="#search">Search</a>
+                <form id="search" method="get" action="//google.com/search">
+                    <input type="text" name="q" placeholder="Search" />
+                    <input type="hidden" name="as_sitesearch" value="https://matthieugouel.github.io">
+                </form>
+            </li>
+            <li class="menu">
+                <a class="fa-bars" href="#menu">Menu</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+<section id="menu">
+
+    
+        <section>
+            <form class="search" method="get" action="//google.com/search">
+                <input type="text" name="q" placeholder="Search" />
+                <input type="hidden" name="as_sitesearch" value="https://matthieugouel.github.io">
+            </form>
+        </section>
+
+    
+        <section>
+            <ul class="links">
+                
+                    <li>
+                        <a href="/">
+                            <h3>
+                                <i class="fa fa-home">&nbsp;</i>Accueil
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/blog/">
+                            <h3>
+                                <i class="fa fa-newspaper-o">&nbsp;</i>Blog
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/projects/">
+                            <h3>
+                                <i class="fa fa-tasks">&nbsp;</i>Projets
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/">
+                            <h3>
+                                <i class="fa fa-sitemap">&nbsp;</i>Catégories
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/contact/">
+                            <h3>
+                                <i class="fa fa-envelope-o">&nbsp;</i>Contact
+                            </h3>
+                        </a>
+                    </li>
+                
+            </ul>
+        </section>
+
+    
+        <section id="recent-posts">
+            <div class="mini-posts">
+                <header>
+                    <h3>Posts récents</h3>
+                </header>
+                
+
+                
+                    
+                
+
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/2018-11-22-oops-i-did-it-again/">Oops!... I Did It Again</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2018-11-22'>
+                                    22-11-2018</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-11-22-oops-i-did-it-again/" class="image featured">
+            <img src="/img/blog/dev.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/2018-07-24-presentation-de-gibica/">Présentation de Gibica</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2018-07-24'>
+                                    24-07-2018</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-07-24-presentation-de-gibica/" class="image featured">
+            <img src="/img/blog/dev.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/">Développement continu à la maison (partie 4)</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2018-06-27'>
+                                    27-06-2018</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/" class="image featured">
+            <img src="/img/blog/devops.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/2018-06-05-developpement-continu-a-la-maison-partie-3/">Développement continu à la maison (partie 3)</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2018-06-05'>
+                                    05-06-2018</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-06-05-developpement-continu-a-la-maison-partie-3/" class="image featured">
+            <img src="/img/blog/devops.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/2018-05-28-gerer-nos-certificats-ssl/">Gérer nos certificats SSL</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2018-05-28'>
+                                    28-05-2018</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-05-28-gerer-nos-certificats-ssl/" class="image featured">
+            <img src="/img/blog/devops.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+
+                
+                    <a href=
+                        
+                            /blog/
+                        
+                        class="button">Voir plus</a>
+                
+            </div>
+        </section>
+
+    
+        
+</section>
+
+    <section id="share-menu">
+    <section id="social-share-nav">
+        <ul class="links">
+            <header>
+                <h3>Partager ce post <i class="fa fa-smile-o"></i></h3>
+            </header>
+            
+
+
+<li>
+  <a href="//twitter.com/share?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-05-14-developpement-continu-a-la-maison-partie-1%2f&amp;text=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%201%29&amp;via=matthieugouel" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+<li>
+  <a href="//plus.google.com/share?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-05-14-developpement-continu-a-la-maison-partie-1%2f" target="_blank" class="share-btn google-plus">
+    <i class="fa fa-google-plus"></i>
+    <p>Google+</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-05-14-developpement-continu-a-la-maison-partie-1%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+<li>
+  <a href="//reddit.com/submit?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-05-14-developpement-continu-a-la-maison-partie-1%2f&amp;title=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%201%29" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-05-14-developpement-continu-a-la-maison-partie-1%2f&amp;title=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%201%29" target="_blank" class="share-btn linkedin">
+      <i class="fa fa-linkedin"></i>
+      <p>LinkedIn</p>
+    </a>
+</li>
+
+
+<li>
+  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-05-14-developpement-continu-a-la-maison-partie-1%2f&amp;title=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%201%29" target="_blank" class="share-btn stumbleupon">
+    <i class="fa fa-stumbleupon"></i>
+    <p>StumbleUpon</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-05-14-developpement-continu-a-la-maison-partie-1%2f&amp;description=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%201%29" target="_blank" class="share-btn pinterest">
+    <i class="fa fa-pinterest-p"></i>
+    <p>Pinterest</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by &amp;body=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-05-14-developpement-continu-a-la-maison-partie-1%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+        </ul>
+    </section>
+</section>
+
+    
+    <div id="main">
+        
+        
+        <article class="post">
+  <header>
+    <div class="title">
+        
+            <h1><a href="/blog/2018-05-14-developpement-continu-a-la-maison-partie-1/">Développement continu à la maison (partie 1)</a></h1>
+            
+        
+        
+            <p>Introduction</p>
+        
+    </div>
+    <div class="meta">
+        <time class="published"
+            datetime='2018-05-14 00:00:00 &#43;0000 UTC'>
+            14-05-2018</time>
+        <span class="author"></span>
+        
+            <p>6 minutes</p>
+        
+    </div>
+</header>
+
+
+  
+    <section id="social-share">
+      <ul class="icons">
+        
+
+
+<li>
+  <a href="//twitter.com/share?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-05-14-developpement-continu-a-la-maison-partie-1%2f&amp;text=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%201%29&amp;via=matthieugouel" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+<li>
+  <a href="//plus.google.com/share?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-05-14-developpement-continu-a-la-maison-partie-1%2f" target="_blank" class="share-btn google-plus">
+    <i class="fa fa-google-plus"></i>
+    <p>Google+</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-05-14-developpement-continu-a-la-maison-partie-1%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+<li>
+  <a href="//reddit.com/submit?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-05-14-developpement-continu-a-la-maison-partie-1%2f&amp;title=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%201%29" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-05-14-developpement-continu-a-la-maison-partie-1%2f&amp;title=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%201%29" target="_blank" class="share-btn linkedin">
+      <i class="fa fa-linkedin"></i>
+      <p>LinkedIn</p>
+    </a>
+</li>
+
+
+<li>
+  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-05-14-developpement-continu-a-la-maison-partie-1%2f&amp;title=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%201%29" target="_blank" class="share-btn stumbleupon">
+    <i class="fa fa-stumbleupon"></i>
+    <p>StumbleUpon</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-05-14-developpement-continu-a-la-maison-partie-1%2f&amp;description=D%c3%a9veloppement%20continu%20%c3%a0%20la%20maison%20%28partie%201%29" target="_blank" class="share-btn pinterest">
+    <i class="fa fa-pinterest-p"></i>
+    <p>Pinterest</p>
+  </a>
+</li>
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by &amp;body=https%3a%2f%2fmatthieugouel.github.io%2fblog%2f2018-05-14-developpement-continu-a-la-maison-partie-1%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+      </ul>
+    </section>
+  
+
+  
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-05-14-developpement-continu-a-la-maison-partie-1/" class="image featured">
+            <img src="/img/blog/devops.jpg" alt="">
+        </a>
+    
+
+
+  <div id="content">
+    
+
+<p>Premier article du thème DevOps. Ce thème regroupera les articles parlant des sujets d’automatisation et de déploiement d’applications dans un environment de production. C’est vaste !</p>
+
+<!-- more -->
+
+<p>Je vous propose dans cette série d’articles de construire pas à pas notre écosystème moderne de développement continu.  Nous commencerons par installer un orchestrateur qui nous servira de fondations pour notre système. Sur ces fondations nous déploierons les services nécessaires pour faire de l’intégration continue comme un logiciel de gestion de version, un système de développement continu, des dépôts etc … Enfin, une fois tout ça fait il ne nous restera plus qu’à mettre en place notre workflow afin de déployer nos propres applications au sein même de notre orchestrateur. La boucle est bouclée !</p>
+
+<h2 id="kubernetes-comme-orchestrateur">Kubernetes comme orchestrateur</h2>
+
+<p><a href="https://fr.wikipedia.org/wiki/Kubernetes">Kubernetes</a> ( ou « k8s » pour les intimes) est un orchestrateur de conteneurs open source développé par Google.
+Le but de Kubernetes est de permettre le déploiement, le maintien et la mise à l’échelle d’applications conteneurisés. Au lieu d’avoir une grosse application monolithique en production, nous pourrons segmenter les différentes parties de notre application en conteneurs et Kubernetes sera en charge de les manager.</p>
+
+<p>Les conteneurs sont vraiment pratique pendant la phrase de développement. ils permettent d’avoir les même conditions système pour tous les développeurs, de ne pas polluer son environnement de travail avec des tonnes d’applications et inversement, de segmenter les différentes parties critiques, de gérer les versions, etc …
+Par contre quand il s’agit de mettre tout ça en production, ça devient tout de suite plus compliqué. On va avoir tendance à vouloir faire une machine virtuelle par conteneurs mais les conteneurs et les VM c’est pas tout à fait pareil.  Que se passe-t-il quand une VM tombe ? Ou un hyperviseur ? Comment mettre à échelle efficacement ?</p>
+
+<p>C’est là que Kubernetes entre en scène.  Les conteneurs qui servent pour le développement et le staging servent également en production. Cela permet d’avoir à tout moment exactement les mêmes conditions en dev et en prod (donc plus de sueur froide la veille d’un déploiement majeur) . Si un conteneur tombe, Kubernetes se chargera de le reinstancier et comme celui-ci fonctionne en cluster, si un node du cluster tombe alors il reinstanciera tous les conteneurs de ce node autre part. Besoin de plus de ressources ? Il suffit d’ajouter un node et / ou multiplier les conteneurs qui sont trop chargés.</p>
+
+<p>Cette stratégie de conteneurisation unifiée sera de plus incroyablement efficace pour faire du development continu. Eh oui pourquoi s’embêter à justement faire des déploiements majeurs qui change la moitié de la codebase alors que l’on peut le faire de façon controlée et automatisée par petites touches (comme à la fin de chaque sprint par exemple).</p>
+
+<p>Voilà j’espère vous avoir un peu convaincu sur l’utilisation de cette technologie comme base de notre super système de production à la maison, mais laissez-moi tout de même résumer :</p>
+
+<ul>
+<li>Mêmes conditions en dev et en prod</li>
+<li>Gestion du maintien et de la mise à l’échelle des conteneurs qui peut même se faire automatiquement (auto scaling)</li>
+<li>Facilitation du développement continu</li>
+<li>Gestion du réseau et de tout ce qui doit être mis en place pour la communication inter-conteneurs (DNS, DHCP, …)</li>
+<li>Gestion des volumes persistants, des secrets, …</li>
+</ul>
+
+<p>Ah oui, Kubernetes est un orchestrateurs de conteneurs. Ok, mais quoi comme conteneurs exactement ?
+Même si ce n’est pas obligatoire, dans la grande majorité des cas les gens utilisent Kubernetes conjointement avec <a href="https://www.docker.com/">Docker</a>.  D’autres systèmes de conteneurisation existent (je pense notamment à Rocket) mais bon pour notre cas il n’y a pas vraiment d’intérêt à choisir autre chose que Docker.</p>
+
+<h2 id="les-services-de-base-au-développement-continu">Les services de base au développement continu</h2>
+
+<p>Voilà donc on a les fondations de notre système DevOps mais malheureusement ça ne va pas suffire pour créer notre workflow. Pour cela il va nous falloir des services dans notre cluster qui permettront de répondre à ces problématiques :</p>
+
+<ul>
+<li>Gérer l’accès depuis l’extérieur de notre cluster et la sécurité ce ces accès</li>
+<li>Gérer les dépôts de nos images docker voire de nos libraires (nos package Python par exemple)</li>
+<li>Gérer le versioning de notre code et l’intégration continue</li>
+</ul>
+
+<p>Pour tout ce qui est accès à nos conteneurs depuis l’extérieur nous allons utiliser <a href="https://traefik.io/">Træfik</a>. C’est un reverse proxy couramment utilisé pour remplir cette tâche et il fera l’intermédiaire entre nos domaines DNS et nos conteneurs. Ce sera donc l’entrée et la sortie de notre cluster, qui se fera de façon sécurisée avec notre propre CA.</p>
+
+<p>Ensuite nous mettrons en place un dépôt d’image Docker (Docker registry). Cela nous permettra de stocker nos images et Kubernetes ira piocher dedans quand il en aura besoin.</p>
+
+<p>Enfin pour le versioning on va bien évidemment utiliser Git. A la base j’étais parti pour utiliser Gitlab avec Gitlab-CI comme système d’intégration continue. Le soucis c’est que Gitlab demandait trop de resources pour mon pauvre petit cluster. Je me suis donc rabattu sur <a href="https://gogs.io/">Gogs</a> comme gestionnaire de version et <a href="https://drone.io/">Drone </a> comme système d’intégration continue. Et franchement je ne suis pas déçu !</p>
+
+<h2 id="un-workflow-devops">Un Workflow DevOps</h2>
+
+<p>Le principe sera donc de développer sur notre machine, puis d’avoir la possibilité de simuler la prod avec Docker et Docker Compose en local, avant d’envoyer notre code sur notre gestionnaire de version préféré. Le code envoyé entrainera le déclenchement d’un processus d’intégration continue (ou CI/CD pour Continuous Integration / Continuous Deployment)  qui se chargera de lancer les tests et les builds.  Si l’on push sur la « master » alors cela déclenchera en plus le déploiement en production.
+A chaque nouvelle fonctionnalité on code donc sur une branche spécifique ou sur la « develop », et quand on est content on merge notre code tout neuf sur la « master » et le déploiement se fait automatiquement sur Kubernetes.</p>
+
+<p>Le déploiement automatisé est donc composé de plusieurs parties :</p>
+
+<ul>
+<li>Tests de non-régression (unitaires, fonctionnels, …)</li>
+<li>Builds (quand il y’en a besoin)</li>
+<li>Création et déploiement de l’image sur le Docker registry</li>
+<li>Remplacement de l’image docker de production par la nouvelle sur Kubernetes</li>
+</ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>On a donc fait le tour des technologies que l’on va mettre en place dans cette série.  C’était beaucoup de mots pour pas beaucoup d’action mais il me semblait nécessaire de planter le décor avant de se lancer tête baissée.</p>
+
+<p>Dans le prochain article de ce thème on mettra enfin la main à la pâte. Il s’agira de créer notre propre cluster Kubernetes !
+A bientôt donc pour poser la première brique de notre écosystème DevOps.</p>
+
+<p>Les articles de la série :</p>
+
+<ul>
+<li><a href="https://matthieugouel.github.io/blog/2018-05-14-developpement-continu-a-la-maison-partie-1/">Développement continu à la maison (partie 1)</a></li>
+<li><a href="https://matthieugouel.github.io/blog/2018-05-21-developpement-continu-a-la-maison-partie-2/">Développement continu à la maison (partie 2)</a></li>
+<li><a href="https://matthieugouel.github.io/blog/2018-06-04-developpement-continu-a-la-maison-partie-3/">Développement continu à la maison (partie 3)</a></li>
+<li><a href="https://matthieugouel.github.io/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/">Développement continu à la maison (partie 4)</a></li>
+</ul>
+
+  </div>
+
+  <footer>
+    <ul class="stats">
+    
+        
+
+        
+        
+            <li>
+                
+                
+                    
+
+                    
+                        Catégorie
+                    
+                
+            </li>
+        
+    
+
+    
+    
+        <li><a href='/categories/devops' lang="fr">DevOps</a></li>
+    
+</ul>
+
+  </footer>
+
+</article>
+
+    <article class="post">
+        <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "https-matthieugouel-github-io" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </article>
+
+
+<ul class="actions pagination">
+    
+
+    
+        <li><a href="/blog/2018-05-21-developpement-continu-a-la-maison-partie-2/"
+                class="button big next">Développement continu à la maison (partie 2)</a></li>
+    
+</ul>
+
+
+    </div>
+    
+<section id="sidebar">
+
+  
+  <section id="intro">
+    
+    
+    
+      <header>
+        <h2>Random Logs</h2>
+        <p>A collection of random thoughts</p>
+      </header>
+    
+    
+      <ul class="icons">
+        
+          
+    <li><a href="https://matthieugouel.github.io/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
+
+
+        
+        
+  <li><a href="//github.com/matthieugouel" target="_blank" title="GitHub" class="fa fa-github"></a></li>
+
+
+
+
+
+
+
+  <li><a href="//twitter.com/matthieugouel" target="_blank" title="Twitter" class="fa fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="//500px.com/matthieugouel" target="_blank" title="500px" class="fa fa-500px"></a></li>
+
+
+
+  <li><a href="//linkedin.com/in/matthieu-gouel-04005295" target="_blank" title="LinkedIn" class="fa fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="mailto:matthieu.gouel@gmail.com" title="Email" class="fa fa-envelope"></a></li>
+
+
+      </ul>
+    
+  </section>
+
+  
+  <section id="recent-posts">
+    <div class="mini-posts">
+      <header>
+        <h3>Posts récents</h3>
+      </header>
+      <div class="posts-container">
+        
+
+        
+          
+        
+
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/2018-11-22-oops-i-did-it-again/">Oops!... I Did It Again</a>
+              </h3>
+              
+              <time class="published" datetime='2018-11-22 00:00:00 &#43;0000 UTC'>
+              22-11-2018</time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-11-22-oops-i-did-it-again/" class="image featured">
+            <img src="/img/blog/dev.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/2018-07-24-presentation-de-gibica/">Présentation de Gibica</a>
+              </h3>
+              
+              <time class="published" datetime='2018-07-24 00:00:00 &#43;0000 UTC'>
+              24-07-2018</time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-07-24-presentation-de-gibica/" class="image featured">
+            <img src="/img/blog/dev.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/">Développement continu à la maison (partie 4)</a>
+              </h3>
+              
+              <time class="published" datetime='2018-06-27 00:00:00 &#43;0000 UTC'>
+              27-06-2018</time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-06-27-developpement-continu-a-la-maison-partie-4/" class="image featured">
+            <img src="/img/blog/devops.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/2018-06-05-developpement-continu-a-la-maison-partie-3/">Développement continu à la maison (partie 3)</a>
+              </h3>
+              
+              <time class="published" datetime='2018-06-05 00:00:00 &#43;0000 UTC'>
+              05-06-2018</time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-06-05-developpement-continu-a-la-maison-partie-3/" class="image featured">
+            <img src="/img/blog/devops.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/2018-05-28-gerer-nos-certificats-ssl/">Gérer nos certificats SSL</a>
+              </h3>
+              
+              <time class="published" datetime='2018-05-28 00:00:00 &#43;0000 UTC'>
+              28-05-2018</time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2018-05-28-gerer-nos-certificats-ssl/" class="image featured">
+            <img src="/img/blog/devops.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+      </div>
+
+      
+        <a href=
+          
+            /blog/
+          
+        class="button">Voir plus</a>
+      
+    </div>
+  </section>
+
+  
+  
+  
+  
+  
+    <section id="categories">
+      <header>
+        <h3>
+          <a href="/fr/categories/">Catégories</a>
+        </h3>
+      </header>
+        
+          
+        
+
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/devops/">DevOps</a>
+                <span style="float:right;">4</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/projects/">Projects</a>
+                <span style="float:right;">4</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/d%C3%A9veloppement/">Développement</a>
+                <span style="float:right;">2</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/security/">Security</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+    </section>
+  
+  
+
+
+  
+  
+    <section id="mini-bio">
+      <h3>à propos</h3>
+      <p>Ce blog a pour but de partager mes pensées du moment ou ce que j'apprends au jour le jour. Ce n'est pas nécessairement quelque chose de très sérieux ou très élaboré, plutôt une succession de petites pensées aléatoires tirées de mon expérience personnelle.</p>
+      <a href="/about" class="button">En savoir plus</a>
+    </section>
+  
+
+  
+  <section id="footer">
+    
+      <ul class="icons">
+        
+          
+    <li><a href="https://matthieugouel.github.io/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
+
+
+        
+        
+  <li><a href="//github.com/matthieugouel" target="_blank" title="GitHub" class="fa fa-github"></a></li>
+
+
+
+
+
+
+
+  <li><a href="//twitter.com/matthieugouel" target="_blank" title="Twitter" class="fa fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="//500px.com/matthieugouel" target="_blank" title="500px" class="fa fa-500px"></a></li>
+
+
+
+  <li><a href="//linkedin.com/in/matthieu-gouel-04005295" target="_blank" title="LinkedIn" class="fa fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="mailto:matthieu.gouel@gmail.com" title="Email" class="fa fa-envelope"></a></li>
+
+
+      </ul>
+    
+    <p class="copyright">
+      
+        &copy; 2018
+        
+          Random Logs
+        
+      .
+      Powered by <a href="//gohugo.io" target="_blank">Hugo</a>
+    </p>
+  </section>
+</section>
+
+    </div>
+    <a id="back-to-top" href="#" class="fa fa-arrow-up fa-border fa-2x"></a>
+    
+
+    
+      
+    
+
+    
+      
+      
+      
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+        
+        
+        
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/css.min.js"></script>
+        <script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+      
+    
+    
+    
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script>
+      <script src="/js/util.js"></script>
+      <script src="/js/main.js"></script>
+      <script src="/js/backToTop.js"></script>
+    
+
+    
+      
+        
+      
+    
+
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
+
